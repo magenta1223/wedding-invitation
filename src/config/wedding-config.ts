@@ -128,6 +128,10 @@ export const weddingConfig = {
     // 계좌번호
     account: {
         enableShareUrlButton: false,
+        refusalWreath: {
+            enabled: true,
+            text: "저희는 화환 대신 마음을 전해주시면 감사하겠습니다.",
+        },
         groom: {
             bank: "우리은행",
             number: "1002-266-102280",

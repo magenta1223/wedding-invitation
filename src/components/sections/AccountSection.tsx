@@ -155,6 +155,10 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
         );
     };
 
+    const refuseWreath = (text: string) => {
+        return <TextRow>{text}</TextRow>;
+    };
+
     return (
         <AccountSectionContainer $bgColor={bgColor}>
             <SectionTitle>마음 전하실 곳</SectionTitle>
@@ -229,6 +233,9 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
                         공유하기
                     </ShareButton>
                 </ShareContainer>
+            )}
+            {weddingConfig.account.refusalWreath.enabled && (
+                <TextRow>{weddingConfig.account.refusalWreath.text}</TextRow>
             )}
         </AccountSectionContainer>
     );
@@ -499,6 +506,11 @@ const ShareButton = styled.button<{ $isShare?: boolean }>`
     &:active:after {
         animation: ripple 0.6s ease-out;
     }
+`;
+
+const TextRow = styled.p`
+    font-size: 1.25rem;
+    margin-top: 2rem;
 `;
 
 export default AccountSection;
