@@ -1,36 +1,37 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
-import { GlobalStyle } from '../styles/globalStyles';
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { GlobalStyle } from "../styles/globalStyles";
 
 export default function StyledComponentsRegistry({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+    const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
-  useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
-    return <>{styles}</>;
-  });
+    useServerInsertedHTML(() => {
+        const styles = styledComponentsStyleSheet.getStyleElement();
+        styledComponentsStyleSheet.instance.clearTag();
+        return <>{styles}</>;
+    });
 
-  if (typeof window !== 'undefined') return (
-    <>
-      <GlobalStyle />
-      {children}
-    </>
-  );
+    if (typeof window !== "undefined")
+        return (
+            <>
+                <GlobalStyle />
+                {children}
+            </>
+        );
 
-  return (
-    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      <>
-        <GlobalStyle />
-        {children}
-      </>
-    </StyleSheetManager>
-  );
-} 
+    return (
+        <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+            <>
+                <GlobalStyle />
+                {children}
+            </>
+        </StyleSheetManager>
+    );
+}

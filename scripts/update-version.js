@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // 현재 시간 기반 버전 생성
 const now = new Date();
@@ -20,16 +20,16 @@ export default APP_VERSION;
 `;
 
 // 파일 경로 설정
-const versionFilePath = path.join(__dirname, '../src/config/version.ts');
+const versionFilePath = path.join(__dirname, "../src/config/version.ts");
 
 // 파일 쓰기
 try {
-  fs.writeFileSync(versionFilePath, versionContent, 'utf8');
-  console.log('✅ Version file updated successfully!');
-  console.log(`📦 Version: ${version}`);
-  console.log(`🕒 Build Time: ${buildTime}`);
-  console.log(`🔑 Hash: ${hash}`);
+    fs.writeFileSync(versionFilePath, versionContent, "utf8");
+    console.log("✅ Version file updated successfully!");
+    console.log(`📦 Version: ${version}`);
+    console.log(`🕒 Build Time: ${buildTime}`);
+    console.log(`🔑 Hash: ${hash}`);
 } catch (error) {
-  console.error('❌ Failed to update version file:', error);
-  process.exit(1);
-} 
+    console.error("❌ Failed to update version file:", error);
+    process.exit(1);
+}

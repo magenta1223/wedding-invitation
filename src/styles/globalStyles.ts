@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { createGlobalStyle } from 'styled-components';
-import { weddingConfig } from '../config/wedding-config';
+import { createGlobalStyle } from "styled-components";
+import { weddingConfig } from "../config/wedding-config";
 
-const watermarkId = weddingConfig.meta._jwk_watermark_id || 'JWK-NonCommercial';
+const watermarkId = weddingConfig.meta._jwk_watermark_id || "JWK-NonCommercial";
 
 /**
  * @license
@@ -12,7 +12,7 @@ const watermarkId = weddingConfig.meta._jwk_watermark_id || 'JWK-NonCommercial';
  * 라이선스: CC BY-NC-ND 4.0
  * 저작자표시-비영리-변경금지
  * https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko
- * 
+ *
  * 이 코드는 비상업적 용도로만 사용 가능합니다.
  * 상업적 용도로 사용 시 법적 조치가 취해질 수 있습니다.
  * ID: ${watermarkId}
@@ -119,4 +119,4 @@ export const GlobalStyle = createGlobalStyle`
     --text-light: #999999;
     --jwk-id: "${watermarkId}";
   }
-`; 
+`;

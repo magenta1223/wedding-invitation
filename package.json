@@ -1,42 +1,42 @@
 {
-  "name": "wedding_invitation",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "prebuild": "node scripts/update-version.js",
-    "build": "next build",
-    "build:fresh": "npm run prebuild && npm run build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "framer-motion": "^12.12.1",
-    "next": "15.3.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "styled-components": "^6.1.18"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/kakao-js-sdk": "^1.39.5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@types/styled-components": "^5.1.34",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  },
-  "description": "이 프로젝트는 모바일에 최적화된 웨딩 청첩장 웹사이트입니다. 반응형 디자인으로 모든 기기에서 최적의 사용자 경험을 제공합니다. 직접 쓰기 위해 만들었습니다.\r 유용하다면 Fork와 Star 해주세요~",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/magenta1223/wedding-invitation.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/magenta1223/wedding-invitation/issues"
-  },
-  "homepage": "https://github.com/magenta1223/wedding-invitation#readme"
+    "name": "wedding_invitation",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "prebuild": "node scripts/update-version.js",
+        "build": "next build",
+        "build:fresh": "npm run prebuild && npm run build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "framer-motion": "^12.12.1",
+        "next": "15.3.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "styled-components": "^6.1.18"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/kakao-js-sdk": "^1.39.5",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@types/styled-components": "^5.1.34",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+    },
+    "description": "이 프로젝트는 모바일에 최적화된 웨딩 청첩장 웹사이트입니다. 반응형 디자인으로 모든 기기에서 최적의 사용자 경험을 제공합니다. 직접 쓰기 위해 만들었습니다.\r 유용하다면 Fork와 Star 해주세요~",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/magenta1223/wedding-invitation.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/magenta1223/wedding-invitation/issues"
+    },
+    "homepage": "https://github.com/magenta1223/wedding-invitation#readme"
 }
