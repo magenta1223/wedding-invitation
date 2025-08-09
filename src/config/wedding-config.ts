@@ -129,6 +129,7 @@ export const weddingConfig = {
 
     // 계좌번호
     account: {
+        enableShareUrlButton: false,
         groom: {
             bank: "은행명",
             number: "123-456-789012",
@@ -172,5 +173,18 @@ export const weddingConfig = {
         webhookUrl: process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL || "",
         channel: "#wedding-response",
         compactMessage: true, // 슬랙 메시지를 간결하게 표시
+    },
+
+    // Color swatcher
+    colorSwatcher: {
+        color1: "#f0f0f0", // 배경색
+        color2: "#f0f0f0", // 배경색
+        color3: "#f0f0f0", // 배경색
+        color4: "#f0f0f0", // 배경색
+        color5: "#f0f0f0", // 배경색
+        color6: "#f0f0f0", // 배경색
+        color7: "#f0f0f0", // 배경색
+        color8: "#f0f0f0", // 배경색
+        color9: "#f0f0f0", // 배경색
     },
 };

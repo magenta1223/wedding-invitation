@@ -18,9 +18,7 @@ interface AccountSectionProps {
     bgColor?: "white" | "beige";
 }
 
-const AccountSection = ({ bgColor = 'white' }: AccountSectionProps) => {
-  const [copyStatus, setCopyStatus] = useState<Record<AccountPerson, boolean>>({
-
+const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
     const [copyStatus, setCopyStatus] = useState<
         Record<AccountPerson, boolean>
     >({
@@ -222,6 +220,7 @@ const AccountSection = ({ bgColor = 'white' }: AccountSectionProps) => {
                 </AccountCard>
             </AccountCards>
             {/* 청첩장 공유하기 버튼 */}
+            {weddingConfig.account.enableShareUrlButton && (
                 <ShareContainer>
                     <ShareButton onClick={copyWebsiteUrl}>
                         {urlCopied ? "복사 완료!" : "URL 복사하기"}
@@ -230,6 +229,7 @@ const AccountSection = ({ bgColor = 'white' }: AccountSectionProps) => {
                         공유하기
                     </ShareButton>
                 </ShareContainer>
+            )}
         </AccountSectionContainer>
     );
 };
