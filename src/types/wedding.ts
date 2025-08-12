@@ -1,7 +1,54 @@
+export interface StyledTextProps {
+    text: string;
+    fontConfig: FontConfig;
+    marginConfig?: MarginConfig;
+    paddingConfig?: PaddingConfig;
+    etcConfig?: EtcConfig;
+}
+
+export interface FontConfig {
+    color: string;
+    fontFamily: string;
+    fontSize: number;
+    fontStyle: string;
+    fontWeight?: number;
+}
+
+export interface MarginConfig {
+    horizontal: number | string;
+    vertical: number | string;
+    top: number | string;
+    bottom: number | string;
+    left: number | string;
+    right: number | string;
+}
+
+export interface PaddingConfig {
+    horizontal: number;
+    vertical: number;
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+}
+
+export interface EtcConfig {
+    whiteSpace?: string;
+    lineHeight?: number | string;
+    maxWidth?: number | string;
+    display?: string;
+    alignItems?: string;
+    gap?: number | string;
+    minHeight?: number | string;
+    fontWeight?: number;
+    letterSpacing?: string;
+    textDecoration?: string;
+}
+
 export interface AccountInfo {
-    bank: string;
-    number: string;
-    holder: string;
+    bank: StyledTextProps;
+    number: StyledTextProps;
+    holder: StyledTextProps;
 }
 
 export interface WeddingAccountConfig {

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { weddingConfig } from "../../config/wedding-config";
+import { StyledP } from "../styledElements/p";
 
 interface GallerySectionProps {
     bgColor?: "white" | "beige";
@@ -304,7 +305,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
     if (isLoading) {
         return (
             <GallerySectionContainer $bgColor={bgColor}>
-                <SectionTitle>갤러리</SectionTitle>
+                <StyledP $styledTextProps={weddingConfig.gallery.title}>
+                    {weddingConfig.gallery.title.text}
+                </StyledP>
                 <LoadingContainer>이미지를 불러오는 중...</LoadingContainer>
             </GallerySectionContainer>
         );
@@ -313,7 +316,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
     if (error || images.length === 0) {
         return (
             <GallerySectionContainer $bgColor={bgColor}>
-                <SectionTitle>갤러리</SectionTitle>
+                <StyledP $styledTextProps={weddingConfig.gallery.title}>
+                    {weddingConfig.gallery.title.text}
+                </StyledP>
                 <ErrorContainer>
                     {error || "갤러리 이미지가 없습니다"}
                 </ErrorContainer>
@@ -323,7 +328,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
 
     return (
         <GallerySectionContainer $bgColor={bgColor}>
-            <SectionTitle>갤러리</SectionTitle>
+            <StyledP $styledTextProps={weddingConfig.gallery.title}>
+                {weddingConfig.gallery.title.text}
+            </StyledP>
 
             {galleryLayout === "grid" ? (
                 // 그리드 레이아웃
@@ -447,26 +454,6 @@ const GallerySectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
     text-align: center;
     background-color: ${(props) =>
         props.$bgColor === "beige" ? "#F8F6F2" : "white"};
-`;
-
-const SectionTitle = styled.h2`
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    font-size: 1.5rem;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--secondary-color);
-    }
 `;
 
 const GalleryContainer = styled.div`

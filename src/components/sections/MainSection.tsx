@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { weddingConfig } from "../../config/wedding-config";
+import { FontConfig } from "../../types/wedding";
+import { StyledP } from "../styledElements/p";
 
 const watermarkId = weddingConfig.meta._jwk_watermark_id || "JWK-NonCommercial";
 
@@ -63,9 +65,20 @@ const MainSection = () => {
 
             <Overlay />
             <MainContent>
-                <MainTitle>{weddingConfig.main.title}</MainTitle>
-                <DateText>{weddingConfig.main.date}</DateText>
-                <VenueText>{weddingConfig.main.venue}</VenueText>
+                <StyledP $styledTextProps={weddingConfig.main.header}>
+                    {weddingConfig.main.header.text}
+                </StyledP>
+                <StyledP $styledTextProps={weddingConfig.main.title}>
+                    {weddingConfig.main.title.text}
+                </StyledP>
+
+                <StyledP $styledTextProps={weddingConfig.main.date}>
+                    {weddingConfig.main.date.text}
+                </StyledP>
+
+                <StyledP $styledTextProps={weddingConfig.main.venue}>
+                    {weddingConfig.main.venue.text}
+                </StyledP>
                 {}
                 <HiddenWatermark aria-hidden="true">
                     {watermarkId}
@@ -81,10 +94,8 @@ const MainSection = () => {
 
 // Interface for MainSectionContainer to accept custom props
 // set background transparent when parallax effect is applied
-interface MainSectionProps {
-    $parralaxenabled?: boolean;
-}
-const MainSectionContainer = styled.section<MainSectionProps>`
+
+const MainSectionContainer = styled.section<{ $parralaxenabled: boolean }>`
     position: relative;
     height: 100vh;
     min-height: 100vh;
@@ -99,15 +110,6 @@ const MainSectionContainer = styled.section<MainSectionProps>`
     overflow: hidden;
     background-color: ${(props) =>
         props.$parralaxenabled ? "transparent" : "#f8f6f2"};
-
-    @media (min-width: 768px) and (min-height: 780px) {
-        aspect-ratio: 9 / 16;
-        max-width: calc(100vh * 9 / 16);
-        width: auto;
-        margin: 0 auto;
-        border-radius: 24px; /* 선택사항: 모서리 둥글게 */
-        box-shadow: 0 0 32px rgba(0, 0, 0, 0.08); /* 선택사항: 그림자 */
-    }
 `;
 
 const ImageWrapper = styled.div`
@@ -152,11 +154,16 @@ const MainContent = styled.div`
     }
 `;
 
-const MainTitle = styled.h1`
-    font-family: "PlayfairDisplay", "Times New Roman", serif;
-    font-style: italic;
-    font-size: 3rem;
-    min-height: 3rem;
+const MainTitle = styled.h1<{
+    $fontConfig: FontConfig;
+}>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     letter-spacing: 2px;
     margin-bottom: 1rem;
     font-weight: 400;
@@ -236,8 +243,15 @@ const MainTitle = styled.h1`
     }
 `;
 
-const DateText = styled.p`
-    font-size: 1.25rem;
+const DateText = styled.p<{
+    $fontConfig: FontConfig;
+}>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
     margin-bottom: 0.5rem;
 
     /* 기본 크기에서 세로 길이가 짧을 때 */
@@ -301,8 +315,16 @@ const DateText = styled.p`
     }
 `;
 
-const VenueText = styled.p`
-    font-size: 1rem;
+const VenueText = styled.p<{
+    $fontConfig: FontConfig;
+}>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     @media (max-width: 768px) {
         font-size: 0.95rem;
     }

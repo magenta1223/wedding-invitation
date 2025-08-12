@@ -3,6 +3,8 @@
 import React from "react";
 import styled from "styled-components";
 import { weddingConfig } from "../../config/wedding-config";
+import { FontConfig } from "../../types/wedding";
+import { StyledP } from "../styledElements/p";
 
 interface InvitationSectionProps {
     bgColor?: "white" | "beige";
@@ -12,18 +14,18 @@ const InvitationSection = ({ bgColor = "white" }: InvitationSectionProps) => {
     const { invitation } = weddingConfig;
 
     const hasGroomFather = Boolean(
-        invitation.groom.father && invitation.groom.father.trim() !== ""
+        invitation.groom.father && invitation.groom.father.text.trim() !== ""
     );
     const hasGroomMother = Boolean(
-        invitation.groom.mother && invitation.groom.mother.trim() !== ""
+        invitation.groom.mother && invitation.groom.mother.text.trim() !== ""
     );
     const hasGroomParents = hasGroomFather || hasGroomMother;
 
     const hasBrideFather = Boolean(
-        invitation.bride.father && invitation.bride.father.trim() !== ""
+        invitation.bride.father && invitation.bride.father.text.trim() !== ""
     );
     const hasBrideMother = Boolean(
-        invitation.bride.mother && invitation.bride.mother.trim() !== ""
+        invitation.bride.mother && invitation.bride.mother.text.trim() !== ""
     );
     const hasBrideParents = hasBrideFather || hasBrideMother;
 
@@ -44,54 +46,72 @@ const InvitationSection = ({ bgColor = "white" }: InvitationSectionProps) => {
     };
 
     const groomParentsText = getParentsText(
-        invitation.groom.father || "",
-        invitation.groom.mother || "",
+        invitation.groom.father.text || "",
+        invitation.groom.mother.text || "",
         hasGroomFather,
         hasGroomMother
     );
 
     const brideParentsText = getParentsText(
-        invitation.bride.father || "",
-        invitation.bride.mother || "",
+        invitation.bride.father.text || "",
+        invitation.bride.mother.text || "",
         hasBrideFather,
         hasBrideMother
     );
 
     return (
         <InvitationSectionContainer $bgColor={bgColor}>
-            <InvitationMessage>{invitation.message}</InvitationMessage>
+            <StyledP $styledTextProps={invitation.message}>
+                {invitation.message.text}
+            </StyledP>
 
             <CoupleContainer>
                 <CoupleInfo>
                     {hasGroomParents ? (
-                        <ParentsNames>
+                        <StyledP $styledTextProps={invitation.groom.father}>
                             {groomParentsText}
-                            <ParentLabel>
-                                의 {invitation.groom.label || "아들"}
+                            <ParentLabel
+                                $fontConfig={invitation.groom.label.fontConfig}
+                            >
+                                의 {invitation.groom.label.text || "아들"}
                             </ParentLabel>
-                        </ParentsNames>
+                        </StyledP>
                     ) : (
-                        <ParentsNames>
-                            <ParentLabel>신랑</ParentLabel>
-                        </ParentsNames>
+                        <StyledP $styledTextProps={invitation.groom.name}>
+                            <ParentLabel
+                                $fontConfig={invitation.groom.label.fontConfig}
+                            >
+                                신랑
+                            </ParentLabel>
+                        </StyledP>
                     )}
-                    <CoupleName>{invitation.groom.name}</CoupleName>
+                    <StyledP $styledTextProps={invitation.groom.name}>
+                        {invitation.groom.name.text}
+                    </StyledP>
                 </CoupleInfo>
 
                 <CoupleInfo>
                     {hasBrideParents ? (
-                        <ParentsNames>
+                        <StyledP $styledTextProps={invitation.bride.father}>
                             {brideParentsText}
-                            <ParentLabel>
-                                의 {invitation.bride.label || "딸"}
+                            <ParentLabel
+                                $fontConfig={invitation.bride.label.fontConfig}
+                            >
+                                의 {invitation.bride.label.text || "딸"}
                             </ParentLabel>
-                        </ParentsNames>
+                        </StyledP>
                     ) : (
-                        <ParentsNames>
-                            <ParentLabel>신부</ParentLabel>
-                        </ParentsNames>
+                        <StyledP $styledTextProps={invitation.bride.name}>
+                            <ParentLabel
+                                $fontConfig={invitation.bride.label.fontConfig}
+                            >
+                                신부
+                            </ParentLabel>
+                        </StyledP>
                     )}
-                    <CoupleName>{invitation.bride.name}</CoupleName>
+                    <StyledP $styledTextProps={invitation.bride.name}>
+                        {invitation.bride.name.text}
+                    </StyledP>
                 </CoupleInfo>
             </CoupleContainer>
         </InvitationSectionContainer>
@@ -105,18 +125,6 @@ const InvitationSectionContainer = styled.section<{
     text-align: center;
     background-color: ${(props) =>
         props.$bgColor === "beige" ? "#F8F6F2" : "white"};
-`;
-
-const InvitationMessage = styled.p`
-    white-space: pre-line;
-    line-height: 1.8;
-    max-width: 36rem;
-    margin: 0 auto 2rem auto;
-    font-size: 1rem;
-
-    @media (min-width: 768px) {
-        font-size: 1.125rem;
-    }
 `;
 
 const CoupleContainer = styled.div`
@@ -134,18 +142,16 @@ const CoupleInfo = styled.div`
     text-align: center;
 `;
 
-const ParentsNames = styled.p`
-    margin-bottom: 0.25rem;
-`;
+const ParentLabel = styled.span<{ $fontConfig: FontConfig }>`
+    font
+    -family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
 
-const ParentLabel = styled.span`
-    font-size: 0.875rem;
     margin-left: 0.25rem;
-`;
-
-const CoupleName = styled.p`
-    font-size: 1.25rem;
-    font-weight: 500;
 `;
 
 export default InvitationSection;

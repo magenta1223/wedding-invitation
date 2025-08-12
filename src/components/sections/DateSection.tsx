@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { weddingConfig } from "../../config/wedding-config";
+import { FontConfig } from "../../types/wedding";
+import { StyledTextProps } from "../../types/wedding";
+import { StyledP } from "../styledElements/p";
 
 interface DateSectionProps {
     bgColor?: "white" | "beige";
@@ -18,8 +21,7 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
 
     const [isWeddingPassed, setIsWeddingPassed] = useState(false);
 
-    // 달력 생성 로직
-    const generateCalendar = () => {
+    const calendar = () => {
         const { year, month, day } = weddingConfig.date;
 
         // 해당 월의 첫째 날과 마지막 날 계산
@@ -56,7 +58,33 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
             }
         }
 
-        return calendarDays;
+        return (
+            <CalendarCard>
+                <CalendarHeader>
+                    <span>
+                        {weddingConfig.date.year}년 {weddingConfig.date.month}월
+                    </span>
+                    <div>
+                        <button aria-label="이전 달">
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        <button aria-label="다음 달">
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </CalendarHeader>
+                <CalendarGrid>
+                    <DayName $isWeekend="sun">일</DayName>
+                    <DayName>월</DayName>
+                    <DayName>화</DayName>
+                    <DayName>수</DayName>
+                    <DayName>목</DayName>
+                    <DayName>금</DayName>
+                    <DayName $isWeekend="sat">토</DayName>
+                    {calendarDays}
+                </CalendarGrid>
+            </CalendarCard>
+        );
     };
 
     useEffect(() => {
@@ -92,42 +120,11 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
         return () => clearInterval(timer);
     }, []);
 
-    return (
-        <DateSectionContainer $bgColor={bgColor}>
-            <SectionTitle>일정</SectionTitle>
-
-            <CalendarCard>
-                <CalendarHeader>
-                    <span>
-                        {weddingConfig.date.year}년 {weddingConfig.date.month}월
-                    </span>
-                    <div>
-                        <button aria-label="이전 달">
-                            <i className="fas fa-chevron-left"></i>
-                        </button>
-                        <button aria-label="다음 달">
-                            <i className="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </CalendarHeader>
-
-                <CalendarGrid>
-                    <DayName $isWeekend="sun">일</DayName>
-                    <DayName>월</DayName>
-                    <DayName>화</DayName>
-                    <DayName>수</DayName>
-                    <DayName>목</DayName>
-                    <DayName>금</DayName>
-                    <DayName $isWeekend="sat">토</DayName>
-
-                    {generateCalendar()}
-                </CalendarGrid>
-            </CalendarCard>
-
-            {!isWeddingPassed && (
+    const countDown = (isWeddingPassed: boolean) => {
+        // 결혼식이 지났을 때 카운트다운 표시하지 않음
+        return (
+            !isWeddingPassed && (
                 <CountdownContainer>
-                    <CountdownTitle>결혼까지 남은 시간</CountdownTitle>
-
                     <CountdownWrapper>
                         <CountdownItem>
                             <CountdownValue>{timeLeft.days}</CountdownValue>
@@ -162,9 +159,62 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
                         </CountdownItem>
                     </CountdownWrapper>
                 </CountdownContainer>
-            )}
+            )
+        );
+    };
 
-            <WeddingDate>{weddingConfig.main.date}</WeddingDate>
+    const countDownLabel = (textConfig: StyledTextProps) => {
+        // Assuming `timeLeft` is defined somewhere in the scope
+        // and `TextRow` is a styled component or a component that accepts a `$textConfig` prop
+        return (
+            <TextRow $fontConfig={textConfig.fontConfig}>
+                {textConfig.text.replace(
+                    "{daysLeft}",
+                    timeLeft.days.toString()
+                )}
+            </TextRow>
+        );
+    };
+
+    const dDay = (textConfig: StyledTextProps) => {
+        return (
+            <WeddingDate $fontConfig={textConfig.fontConfig}>
+                {textConfig.text}
+            </WeddingDate>
+        );
+    };
+
+    return (
+        <DateSectionContainer $bgColor={bgColor}>
+            <StyledP $styledTextProps={weddingConfig.date.title}>일정</StyledP>
+            {weddingConfig.date.componentOrder.map((component) => {
+                switch (component) {
+                    case "dday":
+                        return (
+                            <div key="dday">
+                                {dDay(weddingConfig.date.displayDate)}
+                            </div>
+                        );
+                    case "calendar":
+                        return <div key={"calendar"}>{calendar()} </div>;
+                    case "countDown":
+                        return (
+                            <div key={"countDown"}>
+                                {countDown(isWeddingPassed)}
+                            </div>
+                        );
+                    case "countDownLabel":
+                        return (
+                            <div key={"countDownLabel"}>
+                                {countDownLabel(
+                                    weddingConfig.date.countDownLabel
+                                )}
+                            </div>
+                        );
+                    default:
+                        return null;
+                }
+            })}
         </DateSectionContainer>
     );
 };
@@ -174,26 +224,6 @@ const DateSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
     text-align: center;
     background-color: ${(props) =>
         props.$bgColor === "beige" ? "#F8F6F2" : "white"};
-`;
-
-const SectionTitle = styled.h2`
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    font-size: 1.5rem;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--secondary-color);
-    }
 `;
 
 const CalendarCard = styled.div`
@@ -208,6 +238,7 @@ const CalendarCard = styled.div`
 `;
 
 const CalendarHeader = styled.div`
+    font-family: Ridi;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -234,6 +265,7 @@ const CalendarGrid = styled.div`
 `;
 
 const DayName = styled.div<{ $isWeekend?: string }>`
+    font-family: Ridi;
     color: ${(props) =>
         props.$isWeekend === "sun"
             ? "#e57373"
@@ -245,6 +277,7 @@ const DayName = styled.div<{ $isWeekend?: string }>`
 `;
 
 const Day = styled.div<{ $isWeekend?: string }>`
+    font-family: Ridi;
     color: ${(props) =>
         props.$isWeekend === "sun"
             ? "#e57373"
@@ -256,6 +289,7 @@ const Day = styled.div<{ $isWeekend?: string }>`
 `;
 
 const WeddingDay = styled.div`
+    font-family: Ridi;
     background-color: var(--secondary-color);
     color: white;
     border-radius: 50%;
@@ -275,12 +309,6 @@ const CountdownContainer = styled.div`
     @media (max-width: 600px) {
         overflow-x: none;
     }
-`;
-
-const CountdownTitle = styled.h3`
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    font-weight: 500;
 `;
 
 const CountdownWrapper = styled.div`
@@ -361,9 +389,22 @@ const VerticalDivider = styled.div`
     }
 `;
 
-const WeddingDate = styled.p`
-    font-size: 1.25rem;
+const WeddingDate = styled.p<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
     margin-top: 2rem;
 `;
-
+const TextRow = styled.p<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+    margin-top: 2rem;
+`;
 export default DateSection;

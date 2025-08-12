@@ -91,18 +91,57 @@ export default function Home() {
 
     return (
         <main>
-            <MainSection />
-            <InvitationSection bgColor={sectionColorMap["invitation"]} />
-            <DateSection bgColor={sectionColorMap["date"]} />
-            <VenueSection bgColor={sectionColorMap["venue"]} />
-            {galleryPosition === "middle" && (
-                <GallerySection bgColor={sectionColorMap["gallery-middle"]} />
-            )}
-            {showRsvp && <RsvpSection bgColor={sectionColorMap["rsvp"]} />}
-            <AccountSection bgColor={sectionColorMap["account"]} />
-            {galleryPosition === "bottom" && (
-                <GallerySection bgColor={sectionColorMap["gallery-bottom"]} />
-            )}
+            {weddingConfig.componentOrder.map((component) => {
+                if (!component.show) return;
+                switch (component.name) {
+                    case "main":
+                        return <MainSection key="main" />;
+                    case "invitation":
+                        return (
+                            <InvitationSection
+                                key="invitation"
+                                bgColor={sectionColorMap["invitation"]}
+                            />
+                        );
+                    case "date":
+                        return (
+                            <DateSection
+                                key="date"
+                                bgColor={sectionColorMap["date"]}
+                            />
+                        );
+                    case "venue":
+                        return (
+                            <VenueSection
+                                key="venue"
+                                bgColor={sectionColorMap["venue"]}
+                            />
+                        );
+                    case "gallery":
+                        return (
+                            <GallerySection
+                                key="gallery"
+                                bgColor={sectionColorMap["gallery-middle"]}
+                            />
+                        );
+                    case "rsvp":
+                        return (
+                            <RsvpSection
+                                key="rsvp"
+                                bgColor={sectionColorMap["rsvp"]}
+                            />
+                        );
+                    case "account":
+                        return (
+                            <AccountSection
+                                key="account"
+                                bgColor={sectionColorMap["account"]}
+                            />
+                        );
+                    default:
+                        return null;
+                }
+            })}
             <Footer />
         </main>
     );

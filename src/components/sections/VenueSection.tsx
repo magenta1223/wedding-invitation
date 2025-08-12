@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import { weddingConfig } from "../../config/wedding-config";
+import { StyledP } from "../styledElements/p";
 
 declare global {
     interface Window {
@@ -174,16 +175,12 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
                     alt="호텔 위치"
                 />
                 <MapOverlay>
-                    <VenueName
-                        style={{ color: "white", marginBottom: "0.5rem" }}
-                    >
-                        {weddingConfig.venue.name}
-                    </VenueName>
-                    <VenueAddress
-                        style={{ color: "white", fontSize: "0.9rem" }}
-                    >
-                        {weddingConfig.venue.address}
-                    </VenueAddress>
+                    <StyledP $styledTextProps={weddingConfig.venue.name}>
+                        {weddingConfig.venue.name.text}
+                    </StyledP>
+                    <StyledP $styledTextProps={weddingConfig.venue.address}>
+                        {weddingConfig.venue.address.text}
+                    </StyledP>
                 </MapOverlay>
             </StaticMapContainer>
         );
@@ -203,8 +200,10 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
             // 카카오맵 앱/웹으로 연결
             const lat = weddingConfig.venue.coordinates.latitude;
             const lng = weddingConfig.venue.coordinates.longitude;
-            const name = encodeURIComponent(weddingConfig.venue.name);
-            const address = encodeURIComponent(weddingConfig.venue.address);
+            const name = encodeURIComponent(weddingConfig.venue.name.text);
+            const address = encodeURIComponent(
+                weddingConfig.venue.address.text
+            );
             const kakaoMapsUrl = `https://map.kakao.com/link/to/${name},${lat},${lng}`;
             window.open(kakaoMapsUrl, "_blank");
         }
@@ -215,7 +214,7 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
             // TMAP 앱으로 연결 (앱 딥링크만 사용)
             const lat = weddingConfig.venue.coordinates.latitude;
             const lng = weddingConfig.venue.coordinates.longitude;
-            const name = encodeURIComponent(weddingConfig.venue.name);
+            const name = encodeURIComponent(weddingConfig.venue.name.text);
 
             // 모바일 디바이스에서는 앱 실행 시도
             window.location.href = `tmap://route?goalname=${name}&goaly=${lat}&goalx=${lng}`;
@@ -231,16 +230,24 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
 
     return (
         <VenueSectionContainer $bgColor={bgColor}>
-            <SectionTitle>장소</SectionTitle>
+            <StyledP $styledTextProps={weddingConfig.venue.title}>
+                {weddingConfig.venue.title.text}
+            </StyledP>
 
             <VenueInfo>
-                <VenueName>{weddingConfig.venue.name}</VenueName>
-                <VenueAddress>
-                    {formatTextWithLineBreaks(weddingConfig.venue.address)}
-                </VenueAddress>
-                <VenueTel href={`tel:${weddingConfig.venue.tel}`}>
-                    {weddingConfig.venue.tel}
-                </VenueTel>
+                <StyledP $styledTextProps={weddingConfig.venue.name}>
+                    {weddingConfig.venue.name.text}
+                </StyledP>
+                <StyledP $styledTextProps={weddingConfig.venue.address}>
+                    {formatTextWithLineBreaks(weddingConfig.venue.address.text)}
+                </StyledP>
+                <StyledP
+                    $styledTextProps={weddingConfig.venue.tel}
+                    as="a"
+                    href={`tel:${weddingConfig.venue.tel.text}`}
+                >
+                    {weddingConfig.venue.tel.text}
+                </StyledP>
             </VenueInfo>
 
             {mapError ? (
@@ -268,24 +275,39 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
             </NavigateButtonsContainer>
 
             <TransportCard>
-                <CardTitle>대중교통 안내</CardTitle>
+                <StyledP
+                    $styledTextProps={weddingConfig.venue.transportation.title}
+                >
+                    {weddingConfig.venue.transportation.title.text}
+                </StyledP>
                 <TransportItem>
-                    <TransportLabel>지하철</TransportLabel>
-                    <TransportText>
-                        {weddingConfig.venue.transportation.subway}
-                    </TransportText>
-                </TransportItem>
-                <TransportItem>
-                    <TransportLabel>버스</TransportLabel>
-                    <TransportText>
-                        {weddingConfig.venue.transportation.bus}
-                    </TransportText>
+                    <StyledP
+                        $styledTextProps={
+                            weddingConfig.venue.transportation.subway.title
+                        }
+                    >
+                        {weddingConfig.venue.transportation.subway.title.text}
+                    </StyledP>
+                    <StyledP
+                        $styledTextProps={
+                            weddingConfig.venue.transportation.subway.body
+                        }
+                    >
+                        {weddingConfig.venue.transportation.subway.body.text}
+                    </StyledP>
                 </TransportItem>
             </TransportCard>
 
             <ParkingCard>
-                <CardTitle>주차 안내</CardTitle>
-                <TransportText>{weddingConfig.venue.parking}</TransportText>
+                <StyledP $styledTextProps={weddingConfig.venue.parking.title}>
+                    {weddingConfig.venue.parking.title.text}
+                </StyledP>
+                <StyledP $styledTextProps={weddingConfig.venue.parking.body}>
+                    {weddingConfig.venue.parking.body.text}
+                </StyledP>
+                <StyledP $styledTextProps={weddingConfig.venue.parking.remarks}>
+                    {weddingConfig.venue.parking.remarks.text}
+                </StyledP>
             </ParkingCard>
 
             {/* 신랑측 배차 안내 - 정보가 있을 때만 표시 */}
@@ -295,7 +317,13 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
                         onClick={() => toggleShuttle("groom")}
                         $isExpanded={expandedShuttle === "groom"}
                     >
-                        <CardTitle>신랑측 배차 안내</CardTitle>
+                        <StyledP
+                            $styledTextProps={
+                                weddingConfig.venue.groomShuttle.title
+                            }
+                        >
+                            {weddingConfig.venue.groomShuttle.title.text}
+                        </StyledP>
                         <ExpandIcon $isExpanded={expandedShuttle === "groom"}>
                             {expandedShuttle === "groom" ? "−" : "+"}
                         </ExpandIcon>
@@ -304,100 +332,78 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
                     {expandedShuttle === "groom" && (
                         <ShuttleContent>
                             <ShuttleInfo>
-                                <ShuttleLabel>탑승 장소</ShuttleLabel>
-                                <ShuttleText>
+                                <StyledP
+                                    $styledTextProps={
+                                        weddingConfig.venue.groomShuttle
+                                            .location.header
+                                    }
+                                >
+                                    {
+                                        weddingConfig.venue.groomShuttle
+                                            .location.header.text
+                                    }
+                                </StyledP>
+                                <StyledP
+                                    $styledTextProps={
+                                        weddingConfig.venue.groomShuttle
+                                            .location.content
+                                    }
+                                >
                                     {formatTextWithLineBreaks(
                                         weddingConfig.venue.groomShuttle
-                                            .location
+                                            .location.content.text
                                     )}
-                                </ShuttleText>
+                                </StyledP>
                             </ShuttleInfo>
                             <ShuttleInfo>
-                                <ShuttleLabel>출발 시간</ShuttleLabel>
-                                <ShuttleText>
+                                <StyledP
+                                    $styledTextProps={
+                                        weddingConfig.venue.groomShuttle
+                                            .departureTime.header
+                                    }
+                                >
+                                    출발 시간
+                                </StyledP>
+                                <StyledP
+                                    $styledTextProps={
+                                        weddingConfig.venue.groomShuttle
+                                            .departureTime.content
+                                    }
+                                >
                                     {
                                         weddingConfig.venue.groomShuttle
-                                            .departureTime
+                                            .departureTime.content.text
                                     }
-                                </ShuttleText>
+                                </StyledP>
                             </ShuttleInfo>
                             <ShuttleInfo>
-                                <ShuttleLabel>인솔자</ShuttleLabel>
-                                <ShuttleText>
-                                    {
+                                <StyledP
+                                    $styledTextProps={
                                         weddingConfig.venue.groomShuttle.contact
-                                            .name
-                                    }{" "}
-                                    (
-                                    {
-                                        weddingConfig.venue.groomShuttle.contact
-                                            .tel
+                                            .header
                                     }
-                                    )
+                                >
+                                    {
+                                        weddingConfig.venue.groomShuttle.contact
+                                            .header.text
+                                    }
+                                </StyledP>
+                                <StyledP
+                                    $styledTextProps={
+                                        weddingConfig.venue.groomShuttle.contact
+                                            .content
+                                    }
+                                >
+                                    {
+                                        weddingConfig.venue.groomShuttle.contact
+                                            .content.text
+                                    }
                                     <ShuttleCallButton
-                                        href={`tel:${weddingConfig.venue.groomShuttle.contact.tel}`}
+                                        href={`tel:${weddingConfig.venue.groomShuttle.contact.content}`}
                                     >
                                         전화
                                     </ShuttleCallButton>
-                                </ShuttleText>
-                            </ShuttleInfo>
-                        </ShuttleContent>
-                    )}
-                </ShuttleCard>
-            )}
-
-            {/* 신부측 배차 안내 - 정보가 있을 때만 표시 */}
-            {weddingConfig.venue.brideShuttle && (
-                <ShuttleCard>
-                    <ShuttleCardHeader
-                        onClick={() => toggleShuttle("bride")}
-                        $isExpanded={expandedShuttle === "bride"}
-                    >
-                        <CardTitle>신부측 배차 안내</CardTitle>
-                        <ExpandIcon $isExpanded={expandedShuttle === "bride"}>
-                            {expandedShuttle === "bride" ? "−" : "+"}
-                        </ExpandIcon>
-                    </ShuttleCardHeader>
-
-                    {expandedShuttle === "bride" && (
-                        <ShuttleContent>
-                            <ShuttleInfo>
-                                <ShuttleLabel>탑승 장소</ShuttleLabel>
-                                <ShuttleText>
-                                    {formatTextWithLineBreaks(
-                                        weddingConfig.venue.brideShuttle
-                                            .location
-                                    )}
-                                </ShuttleText>
-                            </ShuttleInfo>
-                            <ShuttleInfo>
-                                <ShuttleLabel>출발 시간</ShuttleLabel>
-                                <ShuttleText>
-                                    {
-                                        weddingConfig.venue.brideShuttle
-                                            .departureTime
-                                    }
-                                </ShuttleText>
-                            </ShuttleInfo>
-                            <ShuttleInfo>
-                                <ShuttleLabel>인솔자</ShuttleLabel>
-                                <ShuttleText>
-                                    {
-                                        weddingConfig.venue.brideShuttle.contact
-                                            .name
-                                    }{" "}
-                                    (
-                                    {
-                                        weddingConfig.venue.brideShuttle.contact
-                                            .tel
-                                    }
-                                    )
-                                    <ShuttleCallButton
-                                        href={`tel:${weddingConfig.venue.brideShuttle.contact.tel}`}
-                                    >
-                                        전화
-                                    </ShuttleCallButton>
-                                </ShuttleText>
+                                </StyledP>
                             </ShuttleInfo>
                         </ShuttleContent>
                     )}
@@ -414,43 +420,8 @@ const VenueSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
         props.$bgColor === "beige" ? "#F8F6F2" : "white"};
 `;
 
-const SectionTitle = styled.h2`
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    font-size: 1.5rem;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--secondary-color);
-    }
-`;
-
 const VenueInfo = styled.div`
     margin-bottom: 1.5rem;
-`;
-
-const VenueName = styled.h3`
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-`;
-
-const VenueAddress = styled.p`
-    margin-bottom: 0.5rem;
-`;
-
-const VenueTel = styled.a`
-    color: var(--secondary-color);
-    text-decoration: none;
 `;
 
 const MapContainer = styled.div`
@@ -600,12 +571,6 @@ const TransportItem = styled.div`
 const TransportLabel = styled.p`
     font-weight: 500;
     font-size: 0.875rem;
-`;
-
-const TransportText = styled.p`
-    font-size: 0.875rem;
-    color: var(--text-medium);
-    white-space: pre-line;
 `;
 
 const ShuttleInfo = styled.div`

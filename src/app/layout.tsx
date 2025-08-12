@@ -30,6 +30,31 @@ export default function RootLayout({
                     type="font/ttf"
                     crossOrigin="anonymous"
                 />
+
+                <link
+                    rel="preload"
+                    href="/fonts/Baskervville-VariableFont_wght.ttf"
+                    as="font"
+                    type="font/ttf"
+                    crossOrigin="anonymous"
+                />
+
+                <link
+                    rel="preload"
+                    href="/fonts/Baskervville-Italic-VariableFont_wght.ttf"
+                    as="font"
+                    type="font/ttf"
+                    crossOrigin="anonymous"
+                />
+
+                <link
+                    rel="preload"
+                    href="/fonts/RIDIBatang.otf"
+                    as="font"
+                    type="font/otf"
+                    crossOrigin="anonymous"
+                />
+
                 {}
                 <meta
                     name="generator"

@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { weddingConfig } from "../../config/wedding-config";
-import { AccountInfo } from "../../types/wedding";
+import { AccountInfo, FontConfig } from "../../types/wedding";
+import { StyledP } from "../styledElements/p";
 
 type AccountPerson =
     | "groom"
@@ -101,17 +102,17 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
     const getPersonName = (person: AccountPerson): string => {
         switch (person) {
             case "groom":
-                return weddingConfig.invitation.groom.name;
+                return weddingConfig.invitation.groom.name.text;
             case "bride":
-                return weddingConfig.invitation.bride.name;
+                return weddingConfig.invitation.bride.name.text;
             case "groomFather":
-                return weddingConfig.invitation.groom.father;
+                return weddingConfig.invitation.groom.father.text;
             case "groomMother":
-                return weddingConfig.invitation.groom.mother;
+                return weddingConfig.invitation.groom.mother.text;
             case "brideFather":
-                return weddingConfig.invitation.bride.father;
+                return weddingConfig.invitation.bride.father.text;
             case "brideMother":
-                return weddingConfig.invitation.bride.mother;
+                return weddingConfig.invitation.bride.mother.text;
             default:
                 return "";
         }
@@ -131,19 +132,26 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
 
         // 1줄: 은행명, 2줄: 계좌번호 + 예금주
         const bankText = accountInfo.bank;
-        const numberAndHolder = `${accountInfo.number} ${accountInfo.holder}`;
+        const numberAndHolder = `${accountInfo.number.text} ${accountInfo.holder.text}`;
 
         // 복사할 텍스트: '은행명 계좌번호 (예금주)'
-        const copyText = `${accountInfo.bank} ${accountInfo.number} ${accountInfo.holder}`;
+        const copyText = `${accountInfo.bank.text} ${accountInfo.number.text} ${accountInfo.holder.text}`;
 
         return (
             <AccountRow>
-                <AccountRowTitle>{title}</AccountRowTitle>
+                <AccountRowTitle $fontConfig={bankText.fontConfig}>
+                    {title}
+                </AccountRowTitle>
                 <AccountRowInfo>
-                    <AccountBank>{bankText}</AccountBank>
-                    <AccountNumber>{numberAndHolder}</AccountNumber>
+                    <AccountBank $fontConfig={bankText.fontConfig}>
+                        {bankText.text}
+                    </AccountBank>
+                    <AccountNumber $fontConfig={accountInfo.number.fontConfig}>
+                        {numberAndHolder}
+                    </AccountNumber>
                 </AccountRowInfo>
                 <CopyButton
+                    $fontConfig={accountInfo.number.fontConfig}
                     onClick={(e) => {
                         e.stopPropagation(); // 클릭 이벤트가 상위로 전파되지 않도록 방지
                         copyToClipboard(copyText, person);
@@ -155,13 +163,11 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
         );
     };
 
-    const refuseWreath = (text: string) => {
-        return <TextRow>{text}</TextRow>;
-    };
-
     return (
         <AccountSectionContainer $bgColor={bgColor}>
-            <SectionTitle>마음 전하실 곳</SectionTitle>
+            <StyledP $styledTextProps={weddingConfig.account.title}>
+                {weddingConfig.account.title.text}
+            </StyledP>
             <AccountCards>
                 {/* 신랑측 계좌 카드 */}
                 <AccountCard onClick={() => toggleSide("groom")}>
@@ -234,8 +240,10 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
                     </ShareButton>
                 </ShareContainer>
             )}
-            {weddingConfig.account.refusalWreath.enabled && (
-                <TextRow>{weddingConfig.account.refusalWreath.text}</TextRow>
+            {weddingConfig.account.refusalWreath.text.length != 0 && (
+                <StyledP $styledTextProps={weddingConfig.account.refusalWreath}>
+                    {weddingConfig.account.refusalWreath.text}
+                </StyledP>
             )}
         </AccountSectionContainer>
     );
@@ -246,26 +254,6 @@ const AccountSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
     text-align: center;
     background-color: ${(props) =>
         props.$bgColor === "beige" ? "#F8F6F2" : "white"};
-`;
-
-const SectionTitle = styled.h2`
-    position: relative;
-    display: inline-block;
-    margin-bottom: 2rem;
-    font-weight: 500;
-    font-size: 1.5rem;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: var(--secondary-color);
-    }
 `;
 
 const AccountCards = styled.div`
@@ -345,20 +333,17 @@ const AccountRow = styled.div`
     }
 `;
 
-const AccountRowTitle = styled.div`
+const AccountRowTitle = styled.div<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--secondary-color);
     min-width: 100px;
     text-align: left;
-
-    @media (max-width: 580px) {
-        min-width: 67.5px;
-    }
-
-    @media (max-width: 480px) {
-        min-width: 55px;
-    }
 `;
 
 const NameSpan = styled.span`
@@ -377,18 +362,30 @@ const AccountRowInfo = styled.div`
     min-width: 0;
 `;
 
-const AccountBank = styled.div`
-    font-size: 0.95rem;
+const AccountBank = styled.div<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     color: var(--text-medium);
     white-space: nowrap;
-    font-size: 0.85rem;
     line-height: 1.3;
     @media (max-width: 580px) {
         font-size: 0.75rem;
     }
 `;
 
-const AccountNumber = styled.div`
+const AccountNumber = styled.div<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     font-weight: 500;
     font-size: clamp(0.7rem, 4vw, 1.1rem);
     color: var(--text-dark);
@@ -400,7 +397,14 @@ const AccountNumber = styled.div`
     }
 `;
 
-const CopyButton = styled.button`
+const CopyButton = styled.button<{ $fontConfig: FontConfig }>`
+    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
+        serif;
+    font-style: ${(prop) => prop.$fontConfig.fontStyle};
+    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
+    min-height: ${(prop) => prop.$fontConfig.fontSize};
+    color: ${(prop) => prop.$fontConfig.color};
+
     background-color: transparent;
     border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
@@ -506,11 +510,6 @@ const ShareButton = styled.button<{ $isShare?: boolean }>`
     &:active:after {
         animation: ripple 0.6s ease-out;
     }
-`;
-
-const TextRow = styled.p`
-    font-size: 1.25rem;
-    margin-top: 2rem;
 `;
 
 export default AccountSection;
