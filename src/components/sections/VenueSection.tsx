@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import dynamic from "next/dynamic";
 import { weddingConfig } from "../../config/wedding-config";
 import { StyledP } from "../styledElements/p";
+import { colorSwatcher } from "@/src/config/ColorSwatcher";
 
 declare global {
     interface Window {
@@ -22,11 +22,7 @@ const formatTextWithLineBreaks = (text: string) => {
     ));
 };
 
-interface VenueSectionProps {
-    bgColor?: "white" | "beige";
-}
-
-const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
+const VenueSection = () => {
     const mapRef = useRef<HTMLDivElement>(null);
     const [mapLoaded, setMapLoaded] = useState(false);
     const [debugInfo, setDebugInfo] = useState<string>("");
@@ -137,7 +133,7 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
 
                 // 인포윈도우 생성
                 const infoWindow = new window.naver.maps.InfoWindow({
-                    content: `<div style="padding:10px;min-width:150px;text-align:center;font-size:14px;"><strong>${weddingConfig.venue.name}</strong></div>`,
+                    content: `<div style="padding:10px;min-width:150px;text-align:center;font-size:14px;"><strong>${weddingConfig.venue.name.text}</strong></div>`,
                 });
 
                 // 마커 클릭 시 인포윈도우 표시
@@ -229,7 +225,9 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
     };
 
     return (
-        <VenueSectionContainer $bgColor={bgColor}>
+        <VenueSectionContainer
+            $bgColor={weddingConfig.venue.sectionBackgroundColor}
+        >
             <StyledP $styledTextProps={weddingConfig.venue.title}>
                 {weddingConfig.venue.title.text}
             </StyledP>
@@ -263,13 +261,34 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
             )}
 
             <NavigateButtonsContainer>
-                <NavigateButton onClick={navigateToNaver} $mapType="naver">
+                <NavigateButton
+                    onClick={navigateToNaver}
+                    $mapType="naver"
+                    $backgroundColor={
+                        weddingConfig.venue.buttonStyle.backgroundColor
+                    }
+                    $textColor={weddingConfig.venue.buttonStyle.textColor}
+                >
                     네이버 지도
                 </NavigateButton>
-                <NavigateButton onClick={navigateToKakao} $mapType="kakao">
+                <NavigateButton
+                    onClick={navigateToKakao}
+                    $mapType="kakao"
+                    $backgroundColor={
+                        weddingConfig.venue.buttonStyle.backgroundColor
+                    }
+                    $textColor={weddingConfig.venue.buttonStyle.textColor}
+                >
                     카카오맵
                 </NavigateButton>
-                <NavigateButton onClick={navigateToTmap} $mapType="tmap">
+                <NavigateButton
+                    onClick={navigateToTmap}
+                    $mapType="tmap"
+                    $backgroundColor={
+                        weddingConfig.venue.buttonStyle.backgroundColor
+                    }
+                    $textColor={weddingConfig.venue.buttonStyle.textColor}
+                >
                     TMAP
                 </NavigateButton>
             </NavigateButtonsContainer>
@@ -409,15 +428,24 @@ const VenueSection = ({ bgColor = "white" }: VenueSectionProps) => {
                     )}
                 </ShuttleCard>
             )}
+
+            {weddingConfig.venue.refusalWreath.text.length != 0 && (
+                <ParkingCard>
+                    <StyledP
+                        $styledTextProps={weddingConfig.venue.refusalWreath}
+                    >
+                        {weddingConfig.venue.refusalWreath.text}
+                    </StyledP>
+                </ParkingCard>
+            )}
         </VenueSectionContainer>
     );
 };
 
-const VenueSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
+const VenueSectionContainer = styled.section<{ $bgColor: string }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const VenueInfo = styled.div`
@@ -481,11 +509,15 @@ const NavigateButtonsContainer = styled.div`
     margin-right: auto;
 `;
 
-const NavigateButton = styled.button<{ $mapType?: "naver" | "kakao" | "tmap" }>`
+const NavigateButton = styled.button<{
+    $mapType?: "naver" | "kakao" | "tmap";
+    $textColor: string;
+    $backgroundColor: string;
+}>`
     flex: 1;
     min-width: 6rem;
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: ${(props) => props.$backgroundColor};
+    color: ${(props) => props.$textColor};
     border: none;
     border-radius: 4px;
     padding: 0.5rem 0.5rem;
@@ -497,7 +529,7 @@ const NavigateButton = styled.button<{ $mapType?: "naver" | "kakao" | "tmap" }>`
     transition: all 0.2s ease;
 
     &:hover {
-        background-color: #c4a986;
+        background-color: ${colorSwatcher.textColorHighlight};
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     }
 

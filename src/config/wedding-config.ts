@@ -2,6 +2,7 @@ import { FontConfigPresets } from "./FontConfigPresets";
 import {
     EtcConfig,
     FontConfig,
+    LayoutConfig,
     MarginConfig,
     StyledTextProps,
 } from "../types/wedding";
@@ -18,6 +19,7 @@ interface GalleryConfig {
     layout: GalleryLayout;
     position: GalleryPosition;
     images: string[];
+    sectionBackgroundColor: string;
 }
 
 export const weddingConfig = {
@@ -43,7 +45,7 @@ export const weddingConfig = {
                 fontFamily: "Baskervville",
                 fontSize: 1.5,
                 fontWeight: 500,
-            } as FontConfig, //FontConfigPresets["white-Baskerville-normal-1_500"],
+            } as FontConfig, //FontConfigPresets["white-Baskervville-normal-1_500"],
             marginConfig: {
                 top: "1rem",
                 bottom: "0rem",
@@ -178,6 +180,7 @@ export const weddingConfig = {
     // 결혼식 일정
     date: {
         sectionBackgroundColor: colorSwatcher.white,
+
         title: {
             text: "",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
@@ -199,6 +202,17 @@ export const weddingConfig = {
             text: "동훈과 승민의 결혼식이 {daysLeft}일 남았습니다.",
             fontConfig: FontConfigPresets["textColor-Ridi-normal-1_125"],
         } as StyledTextProps,
+
+        countDownStyles: {
+            fontConfig:
+                FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            marginConfig: {
+                top: "0.5rem",
+                bottom: "0.5rem",
+            } as MarginConfig,
+        } as StyledTextProps,
+
+        verticalDividerColor: colorSwatcher.textColorHighlightDimmed,
 
         // orders
         componentOrder: ["calendar", "countDownLabel", "countDown"],
@@ -253,6 +267,12 @@ export const weddingConfig = {
         placeId: "37117082", // 네이버 지도 장소 ID
         mapZoom: "17", // 지도 줌 레벨
         mapNaverCoordinates: "14141300,4507203,15,0,0,0,dh", // 네이버 지도 길찾기 URL용 좌표 파라미터 (구 형식)
+
+        buttonStyle: {
+            textColor: colorSwatcher.white,
+            backgroundColor: colorSwatcher.textColorHighlight,
+        },
+
         transportation: {
             title: {
                 text: "대중교통 안내",
@@ -341,10 +361,19 @@ export const weddingConfig = {
             },
         },
         // 신부측 배차 안내
+
+        refusalWreath: {
+            text: "저희는 화환 대신 마음을 전해주시면 감사하겠습니다.",
+            fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+            marginConfig: {
+                top: "2rem",
+            },
+        } as StyledTextProps,
     },
 
     // 갤러리
     gallery: {
+        sectionBackgroundColor: colorSwatcher.white,
         title: {
             text: "갤러리",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
@@ -384,14 +413,6 @@ export const weddingConfig = {
             fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
             marginConfig: {
                 bottom: "2rem",
-            },
-        } as StyledTextProps,
-
-        refusalWreath: {
-            text: "저희는 화환 대신 마음을 전해주시면 감사하겠습니다.",
-            fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
-            marginConfig: {
-                top: "2rem",
             },
         } as StyledTextProps,
 
@@ -499,7 +520,8 @@ export const weddingConfig = {
     // RSVP 설정
     rsvp: {
         enabled: false, // RSVP 섹션 표시 여부
-        showMealOption: false, // 식사 여부 입력 옵션 표시 여부
+        showMealOption: false, // 식사 여부 입력 옵션 표시 여부,
+        sectionBackgroundColor: colorSwatcher.white,
     },
 
     // 소개글

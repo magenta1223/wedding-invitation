@@ -6,11 +6,7 @@ import { weddingConfig } from "../../config/wedding-config";
 import { FontConfig } from "../../types/wedding";
 import { StyledP } from "../styledElements/p";
 
-interface InvitationSectionProps {
-    bgColor?: "white" | "beige";
-}
-
-const InvitationSection = ({ bgColor = "white" }: InvitationSectionProps) => {
+const InvitationSection = () => {
     const { invitation } = weddingConfig;
 
     const hasGroomFather = Boolean(
@@ -60,7 +56,9 @@ const InvitationSection = ({ bgColor = "white" }: InvitationSectionProps) => {
     );
 
     return (
-        <InvitationSectionContainer $bgColor={bgColor}>
+        <InvitationSectionContainer
+            $bgColor={weddingConfig.invitation.sectionBackgroundColor}
+        >
             <StyledP $styledTextProps={invitation.message}>
                 {invitation.message.text}
             </StyledP>
@@ -119,12 +117,11 @@ const InvitationSection = ({ bgColor = "white" }: InvitationSectionProps) => {
 };
 
 const InvitationSectionContainer = styled.section<{
-    $bgColor: "white" | "beige";
+    $bgColor: string;
 }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const CoupleContainer = styled.div`

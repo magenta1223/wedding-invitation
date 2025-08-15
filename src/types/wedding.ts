@@ -1,6 +1,7 @@
 export interface StyledTextProps {
     text: string;
     fontConfig: FontConfig;
+    layoutConfig?: LayoutConfig;
     marginConfig?: MarginConfig;
     paddingConfig?: PaddingConfig;
     etcConfig?: EtcConfig;
@@ -12,6 +13,12 @@ export interface FontConfig {
     fontSize: number;
     fontStyle: string;
     fontWeight?: number;
+}
+
+export interface LayoutConfig {
+    display?: string;
+    flexDirection?: string;
+    alignItems?: string;
 }
 
 export interface MarginConfig {

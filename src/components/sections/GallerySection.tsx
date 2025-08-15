@@ -6,10 +6,6 @@ import Image from "next/image";
 import { weddingConfig } from "../../config/wedding-config";
 import { StyledP } from "../styledElements/p";
 
-interface GallerySectionProps {
-    bgColor?: "white" | "beige";
-}
-
 // SVG 화살표 아이콘 컴포넌트 추가
 const ArrowLeftIcon = styled(({ className }: { className?: string }) => (
     <svg
@@ -70,7 +66,7 @@ const LoadingSpinner = styled.div`
     }
 `;
 
-const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
+const GallerySection = () => {
     const [images, setImages] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -304,7 +300,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
 
     if (isLoading) {
         return (
-            <GallerySectionContainer $bgColor={bgColor}>
+            <GallerySectionContainer
+                $bgColor={weddingConfig.gallery.sectionBackgroundColor}
+            >
                 <StyledP $styledTextProps={weddingConfig.gallery.title}>
                     {weddingConfig.gallery.title.text}
                 </StyledP>
@@ -315,7 +313,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
 
     if (error || images.length === 0) {
         return (
-            <GallerySectionContainer $bgColor={bgColor}>
+            <GallerySectionContainer
+                $bgColor={weddingConfig.gallery.sectionBackgroundColor}
+            >
                 <StyledP $styledTextProps={weddingConfig.gallery.title}>
                     {weddingConfig.gallery.title.text}
                 </StyledP>
@@ -327,7 +327,9 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
     }
 
     return (
-        <GallerySectionContainer $bgColor={bgColor}>
+        <GallerySectionContainer
+            $bgColor={weddingConfig.gallery.sectionBackgroundColor}
+        >
             <StyledP $styledTextProps={weddingConfig.gallery.title}>
                 {weddingConfig.gallery.title.text}
             </StyledP>
@@ -449,11 +451,10 @@ const GallerySection = ({ bgColor = "white" }: GallerySectionProps) => {
     );
 };
 
-const GallerySectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
+const GallerySectionContainer = styled.section<{ $bgColor: string }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const GalleryContainer = styled.div`

@@ -4,11 +4,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { weddingConfig } from "../../config/wedding-config";
 
-interface RsvpSectionProps {
-    bgColor?: "white" | "beige";
-}
-
-const RsvpSection = ({ bgColor = "white" }: RsvpSectionProps) => {
+const RsvpSection = () => {
     const [formData, setFormData] = useState({
         name: "",
         isAttending: null as boolean | null,
@@ -143,7 +139,9 @@ const RsvpSection = ({ bgColor = "white" }: RsvpSectionProps) => {
     };
 
     return (
-        <RsvpSectionContainer $bgColor={bgColor}>
+        <RsvpSectionContainer
+            $bgColor={weddingConfig.rsvp?.sectionBackgroundColor}
+        >
             <SectionTitle>참석 여부 회신</SectionTitle>
 
             <RsvpDescription>
@@ -266,11 +264,10 @@ const RsvpSection = ({ bgColor = "white" }: RsvpSectionProps) => {
     );
 };
 
-const RsvpSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
+const RsvpSectionContainer = styled.section<{ $bgColor: string }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const SectionTitle = styled.h2`

@@ -202,47 +202,17 @@ export default function Home() {
                     case "main":
                         return <MainSection key="main" />;
                     case "invitation":
-                        return (
-                            <InvitationSection
-                                key="invitation"
-                                bgColor={sectionColorMap["invitation"]}
-                            />
-                        );
+                        return <InvitationSection key="invitation" />;
                     case "date":
-                        return (
-                            <DateSection
-                                key="date"
-                                bgColor={sectionColorMap["date"]}
-                            />
-                        );
+                        return <DateSection key="date" />;
                     case "venue":
-                        return (
-                            <VenueSection
-                                key="venue"
-                                bgColor={sectionColorMap["venue"]}
-                            />
-                        );
+                        return <VenueSection key="venue" />;
                     case "gallery":
-                        return (
-                            <GallerySection
-                                key="gallery"
-                                bgColor={sectionColorMap["gallery-middle"]}
-                            />
-                        );
+                        return <GallerySection key="gallery" />;
                     case "rsvp":
-                        return (
-                            <RsvpSection
-                                key="rsvp"
-                                bgColor={sectionColorMap["rsvp"]}
-                            />
-                        );
+                        return <RsvpSection key="rsvp" />;
                     case "account":
-                        return (
-                            <AccountSection
-                                key="account"
-                                bgColor={sectionColorMap["account"]}
-                            />
-                        );
+                        return <AccountSection key="account" />;
                     default:
                         return null;
                 }
@@ -278,19 +248,6 @@ const HiddenWatermark = styled.span`
     bottom: 0;
     right: 0;
 `;
-
-// const AnimatedText = styled.div<{ $progress: number }>`
-//     /* progress가 1 미만이면 visible */
-//     ${({ $progress }) => {
-//         const visible = $progress < 1;
-//         return `
-//             transform: ${visible ? "translateY(0)" : "translateY(-30px)"};
-//             opacity: ${visible ? 1 : 0};
-//             max-height: ${visible ? "" : "0"};
-//         `;
-//     }}
-//     overflow: hidden;
-// `;
 
 const AnimatedText = styled.div`
     transition: transform 0.3s ease, opacity 0.3s ease;

@@ -6,12 +6,9 @@ import { weddingConfig } from "../../config/wedding-config";
 import { FontConfig } from "../../types/wedding";
 import { StyledTextProps } from "../../types/wedding";
 import { StyledP } from "../styledElements/p";
+import { StyledDiv } from "../styledElements/div";
 
-interface DateSectionProps {
-    bgColor?: "white" | "beige";
-}
-
-const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
+const DateSection = () => {
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -127,35 +124,83 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
                 <CountdownContainer>
                     <CountdownWrapper>
                         <CountdownItem>
-                            <CountdownValue>{timeLeft.days}</CountdownValue>
-                            <CountdownLabel>일</CountdownLabel>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
+                                {timeLeft.days}
+                            </StyledDiv>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
+                                일
+                            </StyledDiv>
                         </CountdownItem>
-                        <VerticalDivider />
+                        <VerticalDivider
+                            $color={weddingConfig.date.verticalDividerColor}
+                        />
                         <CountdownItem>
-                            <CountdownValue>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
                                 {timeLeft.hours < 10
                                     ? `0${timeLeft.hours}`
                                     : timeLeft.hours}
-                            </CountdownValue>
-                            <CountdownLabel>시간</CountdownLabel>
+                            </StyledDiv>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
+                                시간
+                            </StyledDiv>
                         </CountdownItem>
-                        <VerticalDivider />
+                        <VerticalDivider
+                            $color={weddingConfig.date.verticalDividerColor}
+                        />
                         <CountdownItem>
-                            <CountdownValue>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
                                 {timeLeft.minutes < 10
                                     ? `0${timeLeft.minutes}`
                                     : timeLeft.minutes}
-                            </CountdownValue>
-                            <CountdownLabel>분</CountdownLabel>
+                            </StyledDiv>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
+                                분
+                            </StyledDiv>
                         </CountdownItem>
-                        <VerticalDivider />
+                        <VerticalDivider
+                            $color={weddingConfig.date.verticalDividerColor}
+                        />
                         <CountdownItem>
-                            <CountdownValue>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
                                 {timeLeft.seconds < 10
                                     ? `0${timeLeft.seconds}`
                                     : timeLeft.seconds}
-                            </CountdownValue>
-                            <CountdownLabel>초</CountdownLabel>
+                            </StyledDiv>
+                            <StyledDiv
+                                $styledTextProps={
+                                    weddingConfig.date.countDownStyles
+                                }
+                            >
+                                초
+                            </StyledDiv>
                         </CountdownItem>
                     </CountdownWrapper>
                 </CountdownContainer>
@@ -185,7 +230,9 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
     };
 
     return (
-        <DateSectionContainer $bgColor={bgColor}>
+        <DateSectionContainer
+            $bgColor={weddingConfig.date.sectionBackgroundColor}
+        >
             <StyledP $styledTextProps={weddingConfig.date.title}>일정</StyledP>
             {weddingConfig.date.componentOrder.map((component) => {
                 switch (component) {
@@ -219,11 +266,10 @@ const DateSection = ({ bgColor = "white" }: DateSectionProps) => {
     );
 };
 
-const DateSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
+const DateSectionContainer = styled.section<{ $bgColor: string }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const CalendarCard = styled.div`
@@ -358,7 +404,6 @@ const CountdownValue = styled.div`
     font-family: "Courier New", monospace;
     min-width: 3rem;
     text-align: center;
-    display: inline-block;
 
     @media (max-width: 480px) {
         font-size: 1.85rem;
@@ -373,12 +418,12 @@ const CountdownLabel = styled.div`
     white-space: nowrap;
 `;
 
-const VerticalDivider = styled.div`
+const VerticalDivider = styled.div<{ $color: string }>`
     height: 4.5rem;
     width: 1px;
     min-width: 1px;
     flex-shrink: 0;
-    background-color: var(--secondary-color);
+    background-color: ${(props) => props.$color};
     margin: 0 0.75rem;
     opacity: 0.8;
 

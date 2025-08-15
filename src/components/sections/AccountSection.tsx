@@ -15,11 +15,7 @@ type AccountPerson =
     | "brideMother";
 type AccountSide = "groom" | "bride";
 
-interface AccountSectionProps {
-    bgColor?: "white" | "beige";
-}
-
-const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
+const AccountSection = () => {
     const [copyStatus, setCopyStatus] = useState<
         Record<AccountPerson, boolean>
     >({
@@ -164,7 +160,9 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
     };
 
     return (
-        <AccountSectionContainer $bgColor={bgColor}>
+        <AccountSectionContainer
+            $bgColor={weddingConfig.account.sectionBackgroundColor}
+        >
             <StyledP $styledTextProps={weddingConfig.account.title}>
                 {weddingConfig.account.title.text}
             </StyledP>
@@ -240,20 +238,14 @@ const AccountSection = ({ bgColor = "white" }: AccountSectionProps) => {
                     </ShareButton>
                 </ShareContainer>
             )}
-            {weddingConfig.account.refusalWreath.text.length != 0 && (
-                <StyledP $styledTextProps={weddingConfig.account.refusalWreath}>
-                    {weddingConfig.account.refusalWreath.text}
-                </StyledP>
-            )}
         </AccountSectionContainer>
     );
 };
 
-const AccountSectionContainer = styled.section<{ $bgColor: "white" | "beige" }>`
+const AccountSectionContainer = styled.section<{ $bgColor: string }>`
     padding: 4rem 1.5rem;
     text-align: center;
-    background-color: ${(props) =>
-        props.$bgColor === "beige" ? "#F8F6F2" : "white"};
+    background-color: ${(props) => props.$bgColor};
 `;
 
 const AccountCards = styled.div`
