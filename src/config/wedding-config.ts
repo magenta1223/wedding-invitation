@@ -51,6 +51,7 @@ export const weddingConfig = {
             etcConfig: {
                 letterSpacing: "2px",
                 lineHeight: 1.2,
+                textShadow: "0px 0px 20px black",
             },
         } as StyledTextProps,
 
@@ -102,6 +103,7 @@ export const weddingConfig = {
 
     // 초대의 말씀
     invitation: {
+        sectionBackgroundColor: colorSwatcher.white,
         message: {
             text: "2222서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
             fontConfig: FontConfigPresets["textColor-Ridi-normal-1_125"],
@@ -175,6 +177,7 @@ export const weddingConfig = {
 
     // 결혼식 일정
     date: {
+        sectionBackgroundColor: colorSwatcher.white,
         title: {
             text: "",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
@@ -203,6 +206,8 @@ export const weddingConfig = {
 
     // 장소 정보
     venue: {
+        sectionBackgroundColor: colorSwatcher.white,
+
         title: {
             text: "장소",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
@@ -371,6 +376,8 @@ export const weddingConfig = {
 
     // 계좌번호
     account: {
+        sectionBackgroundColor: colorSwatcher.white,
+
         enableShareUrlButton: false,
         title: {
             text: "마음 전하실 곳",

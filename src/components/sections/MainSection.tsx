@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { weddingConfig } from "../../config/wedding-config";
-import { StyledP } from "../styledElements/p";
 
 const watermarkId = weddingConfig.meta._jwk_watermark_id || "JWK-NonCommercial";
 
@@ -62,27 +61,6 @@ const MainSection = () => {
             </ImageWrapper>
 
             <Overlay />
-            <MainContent>
-                <StyledP $styledTextProps={weddingConfig.main.header}>
-                    {weddingConfig.main.header.text}
-                </StyledP>
-                <StyledP $styledTextProps={weddingConfig.main.title}>
-                    {weddingConfig.main.title.text}
-                </StyledP>
-
-                <StyledP $styledTextProps={weddingConfig.main.date}>
-                    {weddingConfig.main.date.text}
-                </StyledP>
-
-                <StyledP $styledTextProps={weddingConfig.main.venue}>
-                    {weddingConfig.main.venue.text}
-                </StyledP>
-                {}
-                <HiddenWatermark aria-hidden="true">
-                    {watermarkId}
-                </HiddenWatermark>
-            </MainContent>
-
             <ScrollIndicator>
                 <i className="fas fa-chevron-down"></i>
             </ScrollIndicator>
@@ -139,17 +117,6 @@ const Overlay = styled.div`
     z-index: 1;
 `;
 
-const MainContent = styled.div`
-    position: relative;
-    z-index: 2;
-    margin-top: 0.5vh;
-    @media (max-width: 600px) {
-        margin-top: 0.5vh;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-`;
-
 const ScrollIndicator = styled.div`
     position: absolute;
     bottom: 2rem;
@@ -173,18 +140,6 @@ const ScrollIndicator = styled.div`
             transform: translateX(-50%) translateY(-10px);
         }
     }
-`;
-
-const HiddenWatermark = styled.span`
-    position: absolute;
-    opacity: 0.01;
-    font-size: 1px;
-    color: rgba(255, 255, 255, 0.01);
-    pointer-events: none;
-    user-select: none;
-    z-index: -9999;
-    bottom: 0;
-    right: 0;
 `;
 
 export default MainSection;
