@@ -1,16 +1,6 @@
 import { FontConfig, StyledTextProps } from "@/src/types/wedding";
 import { styled } from "styled-components";
 
-const WeddingDate = styled.p<{ $fontConfig: FontConfig }>`
-    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
-        serif;
-    font-style: ${(prop) => prop.$fontConfig.fontStyle};
-    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
-    min-height: ${(prop) => prop.$fontConfig.fontSize};
-    color: ${(prop) => prop.$fontConfig.color};
-    margin-top: 2rem;
-`;
-
 export const StyledP = styled.p<{
     $styledTextProps: StyledTextProps;
 }>`
@@ -65,6 +55,20 @@ export const StyledP = styled.p<{
     ${(prop) =>
         prop.$styledTextProps.etcConfig?.textDecoration &&
         `text-decoration: ${prop.$styledTextProps.etcConfig.textDecoration};`}
+    
+    ${(prop) =>
+        prop.$styledTextProps.etcConfig?.textShadow &&
+        `text-shadow: ${prop.$styledTextProps.etcConfig.textShadow};`}
+
+ ${(prop) =>
+        prop.$styledTextProps.etcConfig?.sticky &&
+        `
+    position: sticky;
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  `}
 `;
 
 // @media (min-width: 768px) {

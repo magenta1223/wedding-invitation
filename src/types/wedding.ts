@@ -43,6 +43,8 @@ export interface EtcConfig {
     fontWeight?: number;
     letterSpacing?: string;
     textDecoration?: string;
+    textShadow?: string; //
+    sticky?: boolean;
 }
 
 export interface AccountInfo {

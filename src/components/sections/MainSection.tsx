@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { weddingConfig } from "../../config/wedding-config";
-import { FontConfig } from "../../types/wedding";
 import { StyledP } from "../styledElements/p";
 
 const watermarkId = weddingConfig.meta._jwk_watermark_id || "JWK-NonCommercial";
@@ -31,7 +30,6 @@ const MainSection = () => {
                 const translateYValue =
                     scrollY * -weddingConfig.main.effects.parallax.scaleCoef;
                 setImageTranslateY(translateYValue);
-                console.log(`Parallax translateY: ${translateYValue}`);
             }
         };
 
@@ -97,7 +95,6 @@ const MainSection = () => {
 
 const MainSectionContainer = styled.section<{ $parralaxenabled: boolean }>`
     position: relative;
-    height: 100vh;
     min-height: 100vh;
     width: 100vw;
     display: flex;
@@ -107,7 +104,6 @@ const MainSectionContainer = styled.section<{ $parralaxenabled: boolean }>`
     padding-top: 3.5vh;
     text-align: center;
     color: white;
-    overflow: hidden;
     background-color: ${(props) =>
         props.$parralaxenabled ? "transparent" : "#f8f6f2"};
 `;
@@ -151,191 +147,6 @@ const MainContent = styled.div`
         margin-top: 0.5vh;
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-`;
-
-const MainTitle = styled.h1<{
-    $fontConfig: FontConfig;
-}>`
-    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
-        serif;
-    font-style: ${(prop) => prop.$fontConfig.fontStyle};
-    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
-    min-height: ${(prop) => prop.$fontConfig.fontSize};
-    color: ${(prop) => prop.$fontConfig.color};
-
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    font-weight: 400;
-    line-height: 1.2;
-
-    /* 기본 크기에서 세로 길이가 짧을 때 */
-    @media (min-width: 769px) and (max-height: 700px) {
-        letter-spacing: 1.5px;
-        margin-bottom: 0.8rem;
-    }
-    @media (min-width: 769px) and (max-height: 600px) {
-        letter-spacing: 1px;
-        margin-bottom: 0.6rem;
-    }
-
-    @media (max-width: 768px) {
-        font-size: 2.5rem;
-        min-height: 2.5rem;
-    }
-
-    /* 768px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 768px) and (max-height: 650px) {
-        letter-spacing: 1px;
-        margin-bottom: 0.8rem;
-    }
-    @media (max-width: 768px) and (max-height: 550px) {
-        letter-spacing: 0.5px;
-        margin-bottom: 0.6rem;
-    }
-
-    @media (max-width: 450px) {
-        font-size: 2rem;
-        min-height: 2rem;
-        letter-spacing: 1.5px;
-    }
-
-    /* 450px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 450px) and (max-height: 600px) {
-        letter-spacing: 1px;
-        margin-bottom: 0.8rem;
-    }
-    @media (max-width: 450px) and (max-height: 500px) {
-        letter-spacing: 0.5px;
-        margin-bottom: 0.6rem;
-    }
-
-    @media (max-width: 360px) {
-        font-size: 1.8rem;
-        min-height: 1.8rem;
-        letter-spacing: 1px;
-    }
-
-    /* 360px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 360px) and (max-height: 550px) {
-        letter-spacing: 0.5px;
-        margin-bottom: 0.8rem;
-    }
-    @media (max-width: 360px) and (max-height: 450px) {
-        letter-spacing: 0.2px;
-        margin-bottom: 0.6rem;
-    }
-
-    @media (max-width: 295px) {
-        font-size: 1.6rem;
-        min-height: 1.6rem;
-        letter-spacing: 0.5px;
-    }
-
-    /* 295px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 295px) and (max-height: 500px) {
-        letter-spacing: 0.2px;
-        margin-bottom: 0.8rem;
-    }
-    @media (max-width: 295px) and (max-height: 400px) {
-        letter-spacing: 0px;
-        margin-bottom: 0.6rem;
-    }
-`;
-
-const DateText = styled.p<{
-    $fontConfig: FontConfig;
-}>`
-    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
-        serif;
-    font-style: ${(prop) => prop.$fontConfig.fontStyle};
-    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
-    min-height: ${(prop) => prop.$fontConfig.fontSize};
-    color: ${(prop) => prop.$fontConfig.color};
-    margin-bottom: 0.5rem;
-
-    /* 기본 크기에서 세로 길이가 짧을 때 */
-    @media (min-width: 769px) and (max-height: 700px) {
-        margin-bottom: 0.4rem;
-    }
-    @media (min-width: 769px) and (max-height: 600px) {
-        margin-bottom: 0.3rem;
-    }
-
-    @media (max-width: 768px) {
-        font-size: 1.2rem;
-        min-height: 0.3rem;
-    }
-
-    /* 768px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 768px) and (max-height: 650px) {
-        margin-bottom: 0.4rem;
-    }
-    @media (max-width: 768px) and (max-height: 550px) {
-        margin-bottom: 0.3rem;
-    }
-
-    @media (max-width: 450px) {
-        font-size: 1.1rem;
-        margin-bottom: 0.15rem;
-    }
-
-    /* 450px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 450px) and (max-height: 600px) {
-        margin-bottom: 0.1rem;
-    }
-    @media (max-width: 450px) and (max-height: 500px) {
-        margin-bottom: 0.05rem;
-    }
-
-    @media (max-width: 360px) {
-        font-size: 1rem;
-        margin-bottom: 0.1rem;
-    }
-
-    /* 360px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 360px) and (max-height: 550px) {
-        margin-bottom: 0.05rem;
-    }
-    @media (max-width: 360px) and (max-height: 450px) {
-        margin-bottom: 0.02rem;
-    }
-
-    @media (max-width: 295px) {
-        font-size: 0.9rem;
-        margin-bottom: 0.05rem;
-    }
-
-    /* 295px 이하에서 세로 길이가 짧을 때 */
-    @media (max-width: 295px) and (max-height: 500px) {
-        margin-bottom: 0.02rem;
-    }
-    @media (max-width: 295px) and (max-height: 400px) {
-        margin-bottom: 0rem;
-    }
-`;
-
-const VenueText = styled.p<{
-    $fontConfig: FontConfig;
-}>`
-    font-family: ${(prop) => prop.$fontConfig.fontFamily}, "Times New Roman",
-        serif;
-    font-style: ${(prop) => prop.$fontConfig.fontStyle};
-    font-size: ${(prop) => prop.$fontConfig.fontSize}rem;
-    min-height: ${(prop) => prop.$fontConfig.fontSize};
-    color: ${(prop) => prop.$fontConfig.color};
-
-    @media (max-width: 768px) {
-        font-size: 0.95rem;
-    }
-    @media (max-width: 450px) {
-        font-size: 0.9rem;
-    }
-    @media (max-width: 360px) {
-        font-size: 0.85rem;
-    }
-    @media (max-width: 295px) {
-        font-size: 0.75rem;
     }
 `;
 

@@ -28,7 +28,7 @@ export const weddingConfig = {
     meta: {
         title: "김동훈 ❤️ 홍승민의 결혼식에 초대합니다",
         description: "결혼식 초대장",
-        ogImage: "/images/thumbnail.jpg",
+        ogImage: "/images/background.jpg",
         noIndex: true,
         _jwk_watermark_id: uniqueIdentifier,
     },
@@ -69,10 +69,12 @@ export const weddingConfig = {
             etcConfig: {
                 letterSpacing: "2px",
                 lineHeight: 1.2,
+                textShadow: "0px 0px 20px black",
+                sticky: true,
             },
         } as StyledTextProps,
 
-        image: "/images/gallery/thumbnail.png",
+        image: "/images/background.jpg",
         date: {
             text: "2025년 11월 16일 일요일 12시 30분",
             fontConfig: FontConfigPresets["white-Ridi-normal-1_250"],
@@ -92,14 +94,13 @@ export const weddingConfig = {
                 scaleCoef: 0.0005,
             },
             parallax: {
-                enabled: false,
+                enabled: true,
                 scaleCoef: 0.3,
             },
         },
     },
 
-
-// 초대의 말씀
+    // 초대의 말씀
     invitation: {
         message: {
             text: "2222서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
@@ -112,7 +113,7 @@ export const weddingConfig = {
             } as MarginConfig,
             etcConfig: {
                 whiteSpace: "pre-line",
-                lineHeight: 1.8, // 행간 
+                lineHeight: 1.8, // 행간
                 maxWidth: 36, // 행 최대 너비
             } as EtcConfig,
         } as StyledTextProps,
@@ -171,8 +172,6 @@ export const weddingConfig = {
             } as StyledTextProps,
         },
     },
-
-
 
     // 결혼식 일정
     date: {
@@ -369,8 +368,6 @@ export const weddingConfig = {
             "/images/gallery/image14.jpg",
         ],
     } as GalleryConfig,
-
-    
 
     // 계좌번호
     account: {
