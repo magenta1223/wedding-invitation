@@ -7,7 +7,4 @@ export const colorSwatcher = {
     textColorHighlight: "#e2acbc", // text color: highlight red
     textColorHighlightDimmed: "#7c7073", // text color: highlight dim
     textColor: "#353132", // text color
-    color7: "#f0f0f0", // 배경색
-    color8: "#f0f0f0", // 배경색
-    color9: "#f0f0f0", // 배경색
 };

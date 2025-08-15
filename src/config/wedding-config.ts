@@ -40,12 +40,13 @@ export const weddingConfig = {
             text: "Wedding Invitation",
             fontConfig: {
                 color: colorSwatcher.white,
-                fontFamily: "Baskerville",
+                fontFamily: "Baskervville",
                 fontSize: 1.5,
                 fontWeight: 500,
             } as FontConfig, //FontConfigPresets["white-Baskerville-normal-1_500"],
             marginConfig: {
-                bottom: "1rem",
+                top: "1rem",
+                bottom: "0rem",
             } as MarginConfig,
             etcConfig: {
                 letterSpacing: "2px",
@@ -57,8 +58,8 @@ export const weddingConfig = {
             text: "Donghoon & Seungmin",
             fontConfig: {
                 color: colorSwatcher.white,
-                fontFamily: "Baskerville",
-                fontStyle: "italic",
+                fontFamily: "Baskervville-italic",
+                fontStyle: "normal",
                 fontSize: 3.0,
                 fontWeight: 400,
             } as FontConfig, //FontConfigPresets["white-Baskerville-normal-1_500"],
@@ -97,18 +98,81 @@ export const weddingConfig = {
         },
     },
 
-    // 소개글
-    intro: {
-        title: {
-            text: "",
-            fontConfig: FontConfigPresets["empty"],
+
+// 초대의 말씀
+    invitation: {
+        message: {
+            text: "2222서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
+            fontConfig: FontConfigPresets["textColor-Ridi-normal-1_125"],
+            marginConfig: {
+                top: "2rem",
+                bottom: "2rem",
+                left: "auto",
+                right: "auto",
+            } as MarginConfig,
+            etcConfig: {
+                whiteSpace: "pre-line",
+                lineHeight: 1.8, // 행간 
+                maxWidth: 36, // 행 최대 너비
+            } as EtcConfig,
         } as StyledTextProps,
 
-        text: {
-            text: "1111서로 다르게 살아온 두 사람이\n같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을\n축복해주시면 더없는 기쁨이겠습니다.",
-            fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-        } as StyledTextProps,
+        groom: {
+            name: {
+                text: "김동훈",
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
+            } as StyledTextProps,
+
+            label: {
+                text: "장남",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            } as StyledTextProps,
+
+            father: {
+                text: "김정수",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+
+                marginConfig: {
+                    bottom: "0.25rem",
+                },
+            } as StyledTextProps,
+
+            mother: {
+                text: "백우정",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            } as StyledTextProps,
+        },
+
+        bride: {
+            name: {
+                text: "홍승민",
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
+            } as StyledTextProps,
+
+            label: {
+                text: "차녀",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            } as StyledTextProps,
+
+            father: {
+                text: "홍찬선",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            } as StyledTextProps,
+
+            mother: {
+                text: "황경숙",
+                fontConfig:
+                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+            } as StyledTextProps,
+        },
     },
+
+
 
     // 결혼식 일정
     date: {
@@ -306,78 +370,7 @@ export const weddingConfig = {
         ],
     } as GalleryConfig,
 
-    // 초대의 말씀
-    invitation: {
-        message: {
-            text: "2222서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
-            fontConfig: FontConfigPresets["black-Ridi-normal-1_125"],
-            marginConfig: {
-                top: 0,
-                bottom: 2,
-                left: "auto",
-                right: "auto",
-            } as MarginConfig,
-            etcConfig: {
-                whiteSpace: "pre-line",
-                lineHeight: 1.8,
-                maxWidth: 36,
-            } as EtcConfig,
-        } as StyledTextProps,
-
-        groom: {
-            name: {
-                text: "김동훈",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-            } as StyledTextProps,
-
-            label: {
-                text: "장남",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-            } as StyledTextProps,
-
-            father: {
-                text: "김정수",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-
-                marginConfig: {
-                    bottom: "0.25rem",
-                },
-            } as StyledTextProps,
-
-            mother: {
-                text: "백우정",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-            } as StyledTextProps,
-        },
-
-        bride: {
-            name: {
-                text: "홍승민",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-            } as StyledTextProps,
-
-            label: {
-                text: "차녀",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-            } as StyledTextProps,
-
-            father: {
-                text: "홍찬선",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-            } as StyledTextProps,
-
-            mother: {
-                text: "황경숙",
-                fontConfig:
-                    FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-            } as StyledTextProps,
-        },
-    },
+    
 
     // 계좌번호
     account: {
@@ -503,6 +496,19 @@ export const weddingConfig = {
     rsvp: {
         enabled: false, // RSVP 섹션 표시 여부
         showMealOption: false, // 식사 여부 입력 옵션 표시 여부
+    },
+
+    // 소개글
+    intro: {
+        title: {
+            text: "",
+            fontConfig: FontConfigPresets["empty"],
+        } as StyledTextProps,
+
+        text: {
+            text: "1111서로 다르게 살아온 두 사람이\n같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을\n축복해주시면 더없는 기쁨이겠습니다.",
+            fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
+        } as StyledTextProps,
     },
 
     // 슬랙 알림 설정

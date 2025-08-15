@@ -68,16 +68,16 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   @font-face {
-    font-family: 'Baskerville';
-    src: url('/fonts/Baskerville-VariableFont_wght.ttf') format('truetype');
+    font-family: 'Baskervville';
+    src: url('/fonts/Baskervville-VariableFont_wght.ttf') format('truetype');
     font-weight: 400 700;
     font-style: normal;
     font-display: block;
   }
 
-    @font-face {
-    font-family: 'Baskerville';
-    src: url('/fonts/Baskerville-Italic-VariableFont_wght.ttf') format('truetype');
+@font-face {
+    font-family: 'Baskervville-Italic';
+    src: url('/fonts/Baskervville-Italic-VariableFont_wght.ttf') format('truetype');
     font-weight: 400 700;
     font-style: normal;
     font-display: block;
