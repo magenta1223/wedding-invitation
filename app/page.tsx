@@ -94,6 +94,7 @@ export default function Home() {
     }, [galleryPosition, showRsvp]);
 
     const [scrollY, setScrollY] = useState(0);
+    const [topCoffee, setTopCoffeeScale] = useState(1);
     const [headerScale, setHeaderScale] = useState(1);
     const [titleScale, setTitleScale] = useState(1);
 
@@ -113,6 +114,7 @@ export default function Home() {
                     setScrollY(y);
 
                     // Header/Title scale
+                    setTopCoffeeScale(Math.max(1 - progress, 0)); // 최대 50% 축소
                     setHeaderScale(Math.max(1 - progress * 0.3, 0.5)); // 최대 50% 축소
                     setTitleScale(Math.max(1 - progress * 0.5, 0.4));
 
@@ -145,6 +147,10 @@ export default function Home() {
         <main>
             <MainContent>
                 <HeaderWrapper progress={progress} height={headerHeight}>
+                    <ScalableBox
+                        scale={topCoffee}
+                    />              
+
                     <StyledPWithScale
                         $styledTextProps={weddingConfig.main.header}
                         scale={headerScale}
@@ -259,6 +265,24 @@ const StyledPWithScale = styled(StyledP)<{ scale: number }>`
     transition: transform 0.2s ease-out;
 `;
 
+
+const ScalableBox = styled.div<{scale: number;}>`
+  // The height is calculated dynamically using props.
+  // We access the 'scale' prop passed to the component.
+  // The value is multiplied by 10 to get the desired rem value.
+  // We use CSS variables for more flexibility and readability.
+  height: ${(props) => `${props.scale * 5}rem`};
+
+  // The width is fixed at 100%.
+  width: 100%;
+
+  // Example background color for visibility.
+
+  // A smooth transition effect for the height property.
+  transition: height 0.3s ease-in-out;
+`;
+
+
 const HeaderWrapper = styled.div<{ progress: number; height: number }>`
     position: fixed;
     top: 0;
@@ -268,7 +292,7 @@ const HeaderWrapper = styled.div<{ progress: number; height: number }>`
 
     padding: 0 2rem; /* 위/아래는 조금 padding, 원하면 제거 가능 */
     background-color: ${({ progress }) =>
-        progress >= 1 ? "rgba(0, 0, 0, 0.1)" : "transparent"};
+        progress >= 1 ? "rgba(124, 112, 115, 0.5)" : "transparent"};
     transition: background-color 0.6s ease;
     align-items: center;
     z-index: 1; /* MainContent 텍스트 위에 배치 */

@@ -4,6 +4,7 @@ import {
     FontConfig,
     LayoutConfig,
     MarginConfig,
+    PaddingConfig,
     StyledTextProps,
 } from "../types/wedding";
 import { colorSwatcher } from "./ColorSwatcher";
@@ -27,6 +28,18 @@ export const weddingConfig = {
 
     // key:`${colorName}-${fontFamily}-${fontStyle}-${fontSizeKey}`;
 
+    sectionTitleConfig: {
+        fontConfig: FontConfigPresets["textColorHighlight-Ridi-normal-1_000"],
+        marginConfig: {
+            top: "0.3rem",
+            bottom: "3rem",
+        } as MarginConfig,
+        etcConfig: {
+            letterSpacing: "1px",
+            lineHeight: 1.2,
+        } as EtcConfig,
+    } as StyledTextProps,
+
     meta: {
         title: "김동훈 ❤️ 홍승민의 결혼식에 초대합니다",
         description: "결혼식 초대장",
@@ -38,20 +51,29 @@ export const weddingConfig = {
     // 메인 화면
     // TODO margin Config
     main: {
+        topCoffee: {
+            text: "",
+            fontConfig:
+                FontConfigPresets["textColorHighlightDimmed-Ridi-normal-1_000"],
+            etcConfig: {
+                minHeight: "100",
+            },
+        } as StyledTextProps,
+
         header: {
             text: "Wedding Invitation",
             fontConfig: {
                 color: colorSwatcher.white,
                 fontFamily: "Baskervville",
-                fontSize: 1.5,
-                fontWeight: 500,
+                fontSize: 0.875,
+                fontWeight: 400,
             } as FontConfig, //FontConfigPresets["white-Baskervville-normal-1_500"],
             marginConfig: {
-                top: "1rem",
+                top: "0.5rem",
                 bottom: "0rem",
             } as MarginConfig,
             etcConfig: {
-                letterSpacing: "2px",
+                letterSpacing: "1px",
                 lineHeight: 1.2,
                 textShadow: "0px 0px 20px black",
             },
@@ -63,32 +85,40 @@ export const weddingConfig = {
                 color: colorSwatcher.white,
                 fontFamily: "Baskervville-italic",
                 fontStyle: "normal",
-                fontSize: 3.0,
+                fontSize: 1.75,
                 fontWeight: 400,
             } as FontConfig, //FontConfigPresets["white-Baskerville-normal-1_500"],
             marginConfig: {
                 bottom: "1rem",
             } as MarginConfig,
             etcConfig: {
-                letterSpacing: "2px",
+                letterSpacing: "1px",
                 lineHeight: 1.2,
+                maxWidth: "100%",
                 textShadow: "0px 0px 20px black",
                 sticky: true,
-            },
+            } as EtcConfig,
         } as StyledTextProps,
 
         image: "/images/background.jpg",
         date: {
             text: "2025년 11월 16일 일요일 12시 30분",
-            fontConfig: FontConfigPresets["white-Ridi-normal-1_250"],
+            fontConfig: FontConfigPresets["white-Ridi-normal-1_000"],
             marginConfig: {
-                bottom: "0.5rem",
+                top: "1rem",
+                bottom: "0.0rem",
             } as MarginConfig,
+            etcConfig: {
+                textShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
+            } as EtcConfig,
         } as StyledTextProps,
 
         venue: {
             text: "아벤티움",
-            fontConfig: FontConfigPresets["white-Ridi-normal-1_250"],
+            fontConfig: FontConfigPresets["white-Ridi-normal-1_000"],
+            etcConfig: {
+                textShadow: "0px 0px 10px rgba(0, 0, 0, 0.6)",
+            } as EtcConfig,
         } as StyledTextProps,
 
         effects: {
@@ -107,7 +137,7 @@ export const weddingConfig = {
     invitation: {
         sectionBackgroundColor: colorSwatcher.white,
         message: {
-            text: "2222서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
+            text: "서로 다르게 살아온 두 사람이\n 같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을 \n축복해주시면 더없는 기쁨이겠습니다.",
             fontConfig: FontConfigPresets["textColor-Ridi-normal-1_125"],
             marginConfig: {
                 top: "2rem",
@@ -138,10 +168,6 @@ export const weddingConfig = {
                 text: "김정수",
                 fontConfig:
                     FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
-
-                marginConfig: {
-                    bottom: "0.25rem",
-                },
             } as StyledTextProps,
 
             mother: {
@@ -179,14 +205,12 @@ export const weddingConfig = {
 
     // 결혼식 일정
     date: {
-        sectionBackgroundColor: colorSwatcher.white,
+        sectionBackgroundColor: colorSwatcher.bodyBackground,
 
         title: {
             text: "",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-            marginConfig: {
-                bottom: "2rem",
-            },
+            marginConfig: {},
         } as StyledTextProps,
         year: 2025,
         month: 11,
@@ -201,18 +225,38 @@ export const weddingConfig = {
         countDownLabel: {
             text: "동훈과 승민의 결혼식이 {daysLeft}일 남았습니다.",
             fontConfig: FontConfigPresets["textColor-Ridi-normal-1_125"],
+            marginConfig: {
+                top: "3.5rem",
+            } as MarginConfig,
         } as StyledTextProps,
 
-        countDownStyles: {
+        countDownNumberStyles: {
             fontConfig:
-                FontConfigPresets["textColorHighlight-Ridi-normal-1_250"],
+                FontConfigPresets["textColorHighlight-Ridi-normal-1_500"],
             marginConfig: {
                 top: "0.5rem",
                 bottom: "0.5rem",
             } as MarginConfig,
+            paddingConfig: {
+                left: "0.5rem",
+                right: "0.5rem",
+            } as PaddingConfig,
         } as StyledTextProps,
 
-        verticalDividerColor: colorSwatcher.textColorHighlightDimmed,
+        countDownTextStyles: {
+            fontConfig:
+                FontConfigPresets["textColorHighlightDimmed-Ridi-normal-0_875"],
+            marginConfig: {
+                top: "0.5rem",
+                bottom: "0.5rem",
+            } as MarginConfig,
+            paddingConfig: {
+                left: "0.5rem",
+                right: "0.5rem",
+            } as PaddingConfig,
+        } as StyledTextProps,
+
+        verticalDividerColor: colorSwatcher.textColorHighlight,
 
         // orders
         componentOrder: ["calendar", "countDownLabel", "countDown"],
@@ -225,9 +269,6 @@ export const weddingConfig = {
         title: {
             text: "장소",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-            marginConfig: {
-                bottom: "2rem",
-            },
         } as StyledTextProps,
 
         name: {
@@ -248,6 +289,9 @@ export const weddingConfig = {
             marginConfig: {
                 bottom: "0.5rem",
             } as MarginConfig,
+            etcConfig: {
+                lineHeight: 1.5,
+            } as EtcConfig,
         } as StyledTextProps,
 
         tel: {
@@ -276,18 +320,21 @@ export const weddingConfig = {
         transportation: {
             title: {
                 text: "대중교통 안내",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_125"],
             },
 
             subway: {
                 title: {
                     text: "지하철",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                    fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
+                    marginConfig: {
+                        top: "0.5rem",
+                    },
                 } as StyledTextProps,
 
                 body: {
                     text: "2, 5호선 충정로역 4번 출구에서 도보 5분\n1, 4호선 서울역 3번 출구에서 도보 15분",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
+                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
                 } as StyledTextProps,
             },
         },
@@ -295,12 +342,15 @@ export const weddingConfig = {
         parking: {
             title: {
                 text: "주차 안내",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_125"],
             } as StyledTextProps,
 
             body: {
                 text: "[별관 주차장] 서소문 공원 (중구 칠패로 5)\n[본관 주차장] 브라운스톤서울 (중구 청파로 464)",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
+                marginConfig: {
+                    top: "0.5rem",
+                },
                 etcConfig: {
                     whiteSpace: "pre-line",
                 },
@@ -310,7 +360,7 @@ export const weddingConfig = {
                 text: "* 별관 주차장을 이용하시면 더욱 여유롭게 이용 가능합니다.",
                 fontConfig:
                     FontConfigPresets[
-                        "textColorHighlightDimmed-Ridi-normal-0_875"
+                        "textColorHighlightDimmed-Ridi-normal-0_750"
                     ],
             } as StyledTextProps,
         },
@@ -319,7 +369,7 @@ export const weddingConfig = {
         groomShuttle: {
             title: {
                 text: "신랑측 배차 안내",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_125"],
             } as StyledTextProps,
 
             location: {
@@ -363,23 +413,17 @@ export const weddingConfig = {
         // 신부측 배차 안내
 
         refusalWreath: {
-            text: "저희는 화환 대신 마음을 전해주시면 감사하겠습니다.",
-            fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
-            marginConfig: {
-                top: "2rem",
-            },
+            text: "축하 화환은 정중히 사양합니다.",
+            fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
         } as StyledTextProps,
     },
 
     // 갤러리
     gallery: {
-        sectionBackgroundColor: colorSwatcher.white,
+        sectionBackgroundColor: colorSwatcher.bodyBackground,
         title: {
             text: "갤러리",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
-            marginConfig: {
-                bottom: "2rem",
-            },
         } as StyledTextProps,
 
         layout: "grid" as GalleryLayout, // "scroll" 또는 "grid" 선택
@@ -406,113 +450,114 @@ export const weddingConfig = {
     // 계좌번호
     account: {
         sectionBackgroundColor: colorSwatcher.white,
-
         enableShareUrlButton: false,
+
+        common: {
+            fontConfig: FontConfigPresets["textColor-Ridi-normal-1_000"],
+        } as StyledTextProps,
+
         title: {
             text: "마음 전하실 곳",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
-            marginConfig: {
-                bottom: "2rem",
-            },
         } as StyledTextProps,
 
         groom: {
             bank: {
                 text: "우리은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             number: {
                 text: "1002-266-102280",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "김동훈",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
 
         bride: {
             bank: {
                 text: "우리은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             number: {
                 text: "1002-956-231799",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "홍승민",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
 
         groomFather: {
             bank: {
                 text: "국민은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
             number: {
                 text: "501602-01-318403",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "백우정",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
 
         groomMother: {
             bank: {
                 text: "국민은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             number: {
                 text: "501602-01-318403",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "백우정",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
 
         brideFather: {
             bank: {
                 text: "국민은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             number: {
                 text: "870-24-0100-211",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "홍찬선",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
 
         brideMother: {
             bank: {
                 text: "국민은행",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
             number: {
                 text: "062002-04-230999",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
 
             holder: {
                 text: "황경숙",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_250"],
+                fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
             } as StyledTextProps,
         },
     },

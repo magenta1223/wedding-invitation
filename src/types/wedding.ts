@@ -22,21 +22,21 @@ export interface LayoutConfig {
 }
 
 export interface MarginConfig {
-    horizontal: number | string;
-    vertical: number | string;
-    top: number | string;
-    bottom: number | string;
-    left: number | string;
-    right: number | string;
+    horizontal: string;
+    vertical: string;
+    top: string;
+    bottom: string;
+    left: string;
+    right: string;
 }
 
 export interface PaddingConfig {
-    horizontal: number;
-    vertical: number;
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
+    horizontal: string;
+    vertical: string;
+    top: string;
+    bottom: string;
+    left: string;
+    right: string;
 }
 
 export interface EtcConfig {
@@ -46,7 +46,7 @@ export interface EtcConfig {
     display?: string;
     alignItems?: string;
     gap?: number | string;
-    minHeight?: number | string;
+    minHeight?: string;
     fontWeight?: number;
     letterSpacing?: string;
     textDecoration?: string;

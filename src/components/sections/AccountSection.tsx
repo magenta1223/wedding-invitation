@@ -166,11 +166,19 @@ const AccountSection = () => {
             <StyledP $styledTextProps={weddingConfig.account.title}>
                 {weddingConfig.account.title.text}
             </StyledP>
+            <StyledP $styledTextProps={weddingConfig.sectionTitleConfig}>
+                /
+            </StyledP>
+
             <AccountCards>
                 {/* 신랑측 계좌 카드 */}
                 <AccountCard onClick={() => toggleSide("groom")}>
                     <AccountCardHeader $isExpanded={expandedSide === "groom"}>
-                        <GroupTitle>신랑 측 계좌번호</GroupTitle>
+                        <StyledP
+                            $styledTextProps={weddingConfig.account.common}
+                        >
+                            신랑 측 계좌번호
+                        </StyledP>
                         <ExpandIcon $isExpanded={expandedSide === "groom"}>
                             {expandedSide === "groom" ? "−" : "+"}
                         </ExpandIcon>
@@ -200,7 +208,11 @@ const AccountSection = () => {
                 {/* 신부측 계좌 카드 */}
                 <AccountCard onClick={() => toggleSide("bride")}>
                     <AccountCardHeader $isExpanded={expandedSide === "bride"}>
-                        <GroupTitle>신부 측 계좌번호</GroupTitle>
+                        <StyledP
+                            $styledTextProps={weddingConfig.account.common}
+                        >
+                            신부 측 계좌번호
+                        </StyledP>
                         <ExpandIcon $isExpanded={expandedSide === "bride"}>
                             {expandedSide === "bride" ? "−" : "+"}
                         </ExpandIcon>

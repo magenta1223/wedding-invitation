@@ -231,6 +231,7 @@ const VenueSection = () => {
             <StyledP $styledTextProps={weddingConfig.venue.title}>
                 {weddingConfig.venue.title.text}
             </StyledP>
+            <StyledP $styledTextProps={weddingConfig.sectionTitleConfig}>/</StyledP>
 
             <VenueInfo>
                 <StyledP $styledTextProps={weddingConfig.venue.name}>
@@ -312,7 +313,7 @@ const VenueSection = () => {
                             weddingConfig.venue.transportation.subway.body
                         }
                     >
-                        {weddingConfig.venue.transportation.subway.body.text}
+                        {formatTextWithLineBreaks(weddingConfig.venue.transportation.subway.body.text)}
                     </StyledP>
                 </TransportItem>
             </TransportCard>
@@ -597,7 +598,6 @@ const CardTitle = styled.h4`
 `;
 
 const TransportItem = styled.div`
-    margin-bottom: 1rem;
 `;
 
 const TransportLabel = styled.p`

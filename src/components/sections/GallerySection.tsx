@@ -298,6 +298,8 @@ const GallerySection = () => {
         setIsExpandedImageLoading(false);
     };
 
+    const [modalVisible, setModalVisible] = useState(false);
+
     if (isLoading) {
         return (
             <GallerySectionContainer
@@ -332,6 +334,9 @@ const GallerySection = () => {
         >
             <StyledP $styledTextProps={weddingConfig.gallery.title}>
                 {weddingConfig.gallery.title.text}
+            </StyledP>
+            <StyledP $styledTextProps={weddingConfig.sectionTitleConfig}>
+                /
             </StyledP>
 
             {galleryLayout === "grid" ? (
@@ -412,7 +417,7 @@ const GallerySection = () => {
                     role="dialog"
                 >
                     <ExpandedImageContainer
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={() => setModalVisible(false)}
                     >
                         {isExpandedImageLoading && (
                             <LoadingSpinnerContainer>
@@ -438,12 +443,6 @@ const GallerySection = () => {
                                 onError={handleExpandedImageError}
                             />
                         </ExpandedImageWrapper>
-                        <CloseButton
-                            onClick={handleCloseExpanded}
-                            aria-label="닫기"
-                        >
-                            ×
-                        </CloseButton>
                     </ExpandedImageContainer>
                 </ExpandedImageOverlay>
             )}
@@ -601,27 +600,21 @@ const ExpandedImageWrapper = styled.div<{ $isLoading: boolean }>`
     transition: opacity 0.3s ease;
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.div`
     position: absolute;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    display: flex;
+
     top: 1rem;
     right: 1rem;
     width: 2.5rem;
     height: 2.5rem;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
+    color: trasparent;
+    background-color: transparent;
     z-index: 10;
     opacity: 0.9;
-
-    &:hover {
-        opacity: 1;
-    }
 `;
 
 const LoadingContainer = styled.div`

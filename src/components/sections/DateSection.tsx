@@ -126,14 +126,14 @@ const DateSection = () => {
                         <CountdownItem>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownNumberStyles
                                 }
                             >
                                 {timeLeft.days}
                             </StyledDiv>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownTextStyles
                                 }
                             >
                                 일
@@ -145,7 +145,7 @@ const DateSection = () => {
                         <CountdownItem>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownNumberStyles
                                 }
                             >
                                 {timeLeft.hours < 10
@@ -154,7 +154,7 @@ const DateSection = () => {
                             </StyledDiv>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownTextStyles
                                 }
                             >
                                 시간
@@ -166,7 +166,7 @@ const DateSection = () => {
                         <CountdownItem>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownNumberStyles
                                 }
                             >
                                 {timeLeft.minutes < 10
@@ -175,7 +175,7 @@ const DateSection = () => {
                             </StyledDiv>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownTextStyles
                                 }
                             >
                                 분
@@ -187,7 +187,7 @@ const DateSection = () => {
                         <CountdownItem>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownNumberStyles
                                 }
                             >
                                 {timeLeft.seconds < 10
@@ -196,7 +196,7 @@ const DateSection = () => {
                             </StyledDiv>
                             <StyledDiv
                                 $styledTextProps={
-                                    weddingConfig.date.countDownStyles
+                                    weddingConfig.date.countDownTextStyles
                                 }
                             >
                                 초
@@ -212,12 +212,12 @@ const DateSection = () => {
         // Assuming `timeLeft` is defined somewhere in the scope
         // and `TextRow` is a styled component or a component that accepts a `$textConfig` prop
         return (
-            <TextRow $fontConfig={textConfig.fontConfig}>
+            <StyledP $styledTextProps={textConfig}>
                 {textConfig.text.replace(
                     "{daysLeft}",
                     timeLeft.days.toString()
                 )}
-            </TextRow>
+            </StyledP>
         );
     };
 
@@ -234,6 +234,10 @@ const DateSection = () => {
             $bgColor={weddingConfig.date.sectionBackgroundColor}
         >
             <StyledP $styledTextProps={weddingConfig.date.title}>일정</StyledP>
+            <StyledP $styledTextProps={weddingConfig.sectionTitleConfig}>
+                /
+            </StyledP>
+
             {weddingConfig.date.componentOrder.map((component) => {
                 switch (component) {
                     case "dday":
