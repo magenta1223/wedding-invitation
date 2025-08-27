@@ -365,53 +365,6 @@ export const weddingConfig = {
             } as StyledTextProps,
         },
 
-        // 신랑측 배차 안내
-        groomShuttle: {
-            title: {
-                text: "신랑측 배차 안내",
-                fontConfig: FontConfigPresets["black-Ridi-normal-1_125"],
-            } as StyledTextProps,
-
-            location: {
-                header: {
-                    text: "탑승 장소",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-
-                content: {
-                    text: "신랑측 배차 출발지",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-            },
-
-            departureTime: {
-                header: {
-                    text: "탑승 시간",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-
-                content: {
-                    text: "오전 10시 30분",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-            },
-
-            contact: {
-                header: {
-                    text: "인솔자",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-
-                content: {
-                    text: "아무개(010-1234-5678)",
-                    fontConfig: FontConfigPresets["black-Ridi-normal-0_875"],
-                } as StyledTextProps,
-
-                number: "010-1234-5678",
-            },
-        },
-        // 신부측 배차 안내
-
         refusalWreath: {
             text: "축하 화환은 정중히 사양합니다.",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_000"],
@@ -574,7 +527,7 @@ export const weddingConfig = {
         } as StyledTextProps,
 
         text: {
-            text: "1111서로 다르게 살아온 두 사람이\n같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을\n축복해주시면 더없는 기쁨이겠습니다.",
+            text: "서로 다르게 살아온 두 사람이\n같은 곳을 바라보며 살아가고자 합니다.\n귀한 걸음 하시어 저희의 새로운 시작을\n축복해주시면 더없는 기쁨이겠습니다.",
             fontConfig: FontConfigPresets["black-Ridi-normal-1_500"],
         } as StyledTextProps,
     },
