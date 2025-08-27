@@ -100,7 +100,7 @@ export const weddingConfig = {
             } as EtcConfig,
         } as StyledTextProps,
 
-        image: "/images/background.jpg",
+        image: "/images/background.png",
         date: {
             text: "2025년 11월 16일 일요일 12시 30분",
             fontConfig: FontConfigPresets["white-Ridi-normal-1_000"],
@@ -429,21 +429,18 @@ export const weddingConfig = {
         layout: "grid" as GalleryLayout, // "scroll" 또는 "grid" 선택
         position: "bottom" as GalleryPosition, // "middle" (현재 위치) 또는 "bottom" (맨 하단) 선택
         images: [
-            "/images/gallery/image1.jpg",
-            "/images/gallery/image2.jpg",
-            "/images/gallery/image3.jpg",
-            "/images/gallery/image4.jpg",
-            "/images/gallery/image5.jpg",
-            "/images/gallery/image6.jpg",
-            "/images/gallery/image7.jpg",
-            "/images/gallery/image8.jpg",
-            "/images/gallery/image9.jpg",
-            "/images/gallery/image10.jpg",
-            "/images/gallery/image11.jpg",
-            "/images/gallery/image12.jpg",
-            "/images/gallery/image13.jpg",
-            "/images/gallery/image14.jpg",
-            "/images/gallery/image14.jpg",
+            "/images/gallery/1.jpg",
+            "/images/gallery/2.jpg",
+            "/images/gallery/3.jpg",
+            "/images/gallery/4.jpg",
+            "/images/gallery/5.jpg",
+            "/images/gallery/6.jpg",
+            "/images/gallery/7.jpg",
+            "/images/gallery/8.jpg",
+            "/images/gallery/9.jpg",
+            "/images/gallery/10.jpg",
+            "/images/gallery/11.jpg",
+            "/images/gallery/12.jpg",
         ],
     } as GalleryConfig,
 
