@@ -138,18 +138,17 @@ export default function Home() {
         const venueVisible = scrollY < 150;
         const venueH = venueVisible ? venueRef.current?.offsetHeight || 0 : 0;
 
-        setHeaderHeight(headerH + titleH + dateH + venueH);
+        setHeaderHeight(headerH + titleH + dateH + venueH); // smooth하게 변하도록
     }, [scrollY]);
 
-    const progress = Math.min(scrollY / 150, 1);
+    const progress1 = Math.min(scrollY / 150, 1);
+    const progress2 = Math.min(scrollY / 150, 2);
 
     return (
         <main>
             <MainContent>
-                <HeaderWrapper progress={progress} height={headerHeight}>
-                    <ScalableBox
-                        scale={topCoffee}
-                    />              
+                <HeaderWrapper progress={progress2} height={headerHeight}>
+                    <ScalableBox scale={topCoffee} />
 
                     <StyledPWithScale
                         $styledTextProps={weddingConfig.main.header}
@@ -166,11 +165,11 @@ export default function Home() {
                         {weddingConfig.main.title.text}
                     </StyledPWithScale>
 
-                    {progress < 1 && (
+                    {progress1 < 1 && (
                         <AnimatedText
                             style={{
-                                transform: `translateY(-${progress * 30}px)`,
-                                opacity: 1 - Math.max(5 * progress - 4, 0),
+                                transform: `translateY(-${progress1 * 30}px)`,
+                                opacity: 1 - Math.max(5 * progress1 - 4, 0),
                             }}
                             ref={dateRef}
                         >
@@ -180,11 +179,11 @@ export default function Home() {
                         </AnimatedText>
                     )}
 
-                    {progress < 1 && (
+                    {progress1 < 1 && (
                         <AnimatedText
                             style={{
-                                transform: `translateY(-${progress * 30}px)`,
-                                opacity: 1 - progress,
+                                transform: `translateY(-${progress1 * 30}px)`,
+                                opacity: 1 - progress1,
                             }}
                             ref={venueRef}
                         >
@@ -262,26 +261,24 @@ const AnimatedText = styled.div`
 const StyledPWithScale = styled(StyledP)<{ scale: number }>`
     transform: scale(${({ scale }) => scale});
     transform-origin: top center;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.4s ease-out;
 `;
 
+const ScalableBox = styled.div<{ scale: number }>`
+    // The height is calculated dynamically using props.
+    // We access the 'scale' prop passed to the component.
+    // The value is multiplied by 10 to get the desired rem value.
+    // We use CSS variables for more flexibility and readability.
+    height: ${(props) => `${props.scale * 5}rem`};
 
-const ScalableBox = styled.div<{scale: number;}>`
-  // The height is calculated dynamically using props.
-  // We access the 'scale' prop passed to the component.
-  // The value is multiplied by 10 to get the desired rem value.
-  // We use CSS variables for more flexibility and readability.
-  height: ${(props) => `${props.scale * 5}rem`};
+    // The width is fixed at 100%.
+    width: 100%;
 
-  // The width is fixed at 100%.
-  width: 100%;
+    // Example background color for visibility.
 
-  // Example background color for visibility.
-
-  // A smooth transition effect for the height property.
-  transition: height 0.3s ease-in-out;
+    // A smooth transition effect for the height property.
+    transition: transform 0.4s ease-out;
 `;
-
 
 const HeaderWrapper = styled.div<{ progress: number; height: number }>`
     position: fixed;
@@ -292,8 +289,10 @@ const HeaderWrapper = styled.div<{ progress: number; height: number }>`
 
     padding: 0 2rem; /* 위/아래는 조금 padding, 원하면 제거 가능 */
     background-color: ${({ progress }) =>
-        progress >= 1 ? "rgba(124, 112, 115, 0.5)" : "transparent"};
-    transition: background-color 0.6s ease;
+        progress >= 1
+            ? `rgba(124, 112, 115, ${(progress - 1) / 2})`
+            : "transparent"};
+    transition: transform 0.4s ease-out;
     align-items: center;
     z-index: 1; /* MainContent 텍스트 위에 배치 */
 `;
