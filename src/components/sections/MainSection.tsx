@@ -53,7 +53,8 @@ const MainSection = () => {
                     fill
                     priority
                     sizes="100vw"
-                    quality={90}
+                    unoptimized={true}
+                    quality={100}
                     $scale={imageScale} // zoomIn effect scale value
                     $translateY={imageTranslateY} // parallax effect translateY value
                     style={{ objectFit: "cover", objectPosition: "center 10%" }}

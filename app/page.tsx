@@ -246,7 +246,7 @@ const HiddenWatermark = styled.span`
     position: absolute;
     opacity: 0.01;
     font-size: 1px;
-    color: rgba(255, 255, 255, 0.01);
+    color: rgba(255, 255, 255, 0);
     pointer-events: none;
     user-select: none;
     z-index: -9999;
