@@ -183,7 +183,7 @@ export default function Home() {
                         <AnimatedText
                             style={{
                                 transform: `translateY(-${progress1 * 30}px)`,
-                                opacity: 1 - progress1,
+                                opacity: 1 - Math.max(5 * progress1 - 4, 0),
                             }}
                             ref={venueRef}
                         >

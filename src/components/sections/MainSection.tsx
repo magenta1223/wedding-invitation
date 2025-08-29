@@ -52,8 +52,7 @@ const MainSection = () => {
                     alt="웨딩 배경 이미지"
                     fill
                     priority
-                    sizes="100vw"
-                    unoptimized={true}
+                    sizes="(max-width: 400px) 800px, (max-width: 600px) 1200px, (max-width: 1000px) 2000px, (max-width: 1600px) 3200px, (max-width: 3840px) 6000px, 100vw"
                     quality={100}
                     $scale={imageScale} // zoomIn effect scale value
                     $translateY={imageTranslateY} // parallax effect translateY value
@@ -88,7 +87,7 @@ const MainSectionContainer = styled.section<{ $parralaxenabled: boolean }>`
 `;
 
 const ImageWrapper = styled.div`
-    position: absolute;
+    position: absoulte;
     top: 0;
     left: 0;
     width: 100%;
