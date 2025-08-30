@@ -358,10 +358,12 @@ export const weddingConfig = {
 
             remarks: {
                 text: "* 별관 주차장을 이용하시면 더욱 여유롭게 이용 가능합니다.",
-                fontConfig:
-                    FontConfigPresets[
-                        "textColorHighlightDimmed-Ridi-normal-0_750"
-                    ],
+                fontConfig: {
+                    color: colorSwatcher.textColorHighlightDimmed,
+                    fontFamily: "Ridi",
+                    fontStyle: "normal",
+                    fontSize: 0.625,
+                },
             } as StyledTextProps,
         },
 
