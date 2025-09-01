@@ -43,7 +43,7 @@ export const weddingConfig = {
     meta: {
         title: "김동훈 ❤️ 홍승민의 결혼식에 초대합니다",
         description: "결혼식 초대장",
-        ogImage: "/images/background.png",
+        ogImage: "/images/preview.png",
         noIndex: true,
         _jwk_watermark_id: uniqueIdentifier,
     },
